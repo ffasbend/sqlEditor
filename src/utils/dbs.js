@@ -2,40 +2,40 @@
 import { ref } from 'vue';
 
 const dbs = [
-{
-  label: 'Demo',
-  value:
-  `
-CREATE TABLE employees (
-      id INTEGER PRIMARY KEY,
-      name TEXT,
-      department TEXT,
-      salary INTEGER
-    );
+// {
+//   label: 'Demo',
+//   value:
+//   `
+// CREATE TABLE employees (
+//       id INTEGER PRIMARY KEY,
+//       name TEXT,
+//       department TEXT,
+//       salary INTEGER
+//     );
 
-    INSERT INTO employees (name, department, salary) VALUES
-      ('Alice', 'Engineeringx', 70000),
-      ('Bob', 'Sales', 50000),
-      ('Charlie', 'HR', 45000),
-      ('Diana', 'Engineering', 80000),
-      ('Evan', 'Sales', 55000);
+//     INSERT INTO employees (name, department, salary) VALUES
+//       ('Alice', 'Engineeringx', 70000),
+//       ('Bob', 'Sales', 50000),
+//       ('Charlie', 'HR', 45000),
+//       ('Diana', 'Engineering', 80000),
+//       ('Evan', 'Sales', 55000);
 
-CREATE TABLE employees2 (
-      id INTEGER PRIMARY KEY,
-      name TEXT,
-      department TEXT,
-      salary INTEGER
-    );
+// CREATE TABLE employees2 (
+//       id INTEGER PRIMARY KEY,
+//       name TEXT,
+//       department TEXT,
+//       salary INTEGER
+//     );
 
-    INSERT INTO employees2 (name, department, salary) VALUES
-      ('Alice', 'Engineeringx', 70000),
-      ('Bob', 'Sales', 50000),
-      ('Charlie', 'HR', 45000),
-      ('Diana', 'Engineering', 80000),
-      ('Evan', 'Sales', 55000);
+//     INSERT INTO employees2 (name, department, salary) VALUES
+//       ('Alice', 'Engineeringx', 70000),
+//       ('Bob', 'Sales', 50000),
+//       ('Charlie', 'HR', 45000),
+//       ('Diana', 'Engineering', 80000),
+//       ('Evan', 'Sales', 55000);
 
-  `
-},
+//   `
+// },
 
 {
 label: 'Exercice 0 - Supermarché',
@@ -655,8 +655,197 @@ INSERT INTO Prêt (NumPrêt, NumExemplaire, NumMembre, DatePrêt, DateRetour) VA
 -- ALTER TABLE Prêt ADD CONSTRAINT MembrePrêt FOREIGN KEY (NumMembre) REFERENCES Membre (NumMembre) ON UPDATE SET NULL ON DELETE SET NULL;
 -- ALTER TABLE Prêt ADD CONSTRAINT ExemplairePrêt FOREIGN KEY (NumExemplaire) REFERENCES Exemplaire (NumExemplaire) ON UPDATE SET NULL ON DELETE SET NULL;
 `
-}
+},
   
+{
+label: 'Cours p. 80 ... 95 - Employé',
+value:
+`
+DROP TABLE IF EXISTS Employé ;
+CREATE TABLE Employé (
+	Numéro float,				-- Numéro de l'employé (clé primaire)
+	Nom varchar(255),			-- Nom de l'employé'
+	Prénom varchar(255),		-- Prénom de l'employé
+	Nationalité varchar(255), 	-- Nationalité de l'employé
+	Age float,					-- Age de l'employé
+	Sexe varchar(255),			-- Sexe de l'employé (M/F)
+	Service varchar(255),		-- Service auquel l'employé est affecté
+	EntréeService datetime		-- Date d'entrée en service
+);
+
+INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (14, 'Reinert', 'Charles', 'ALL', 43, 'M', 'Marketing', '1997-03-21 00:00:00');
+INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (1, 'Wengler', 'Guy', 'LUX', 24, 'M', 'Comptabiltité', '2020-09-21 00:00:00');
+INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (2, 'Jurcevic', 'Alain', 'LUX', 28, 'M', 'Comptabiltité', '2016-09-02 00:00:00');
+INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (3, 'Ribeiro', 'Jean-Marie', 'PRT', 23, 'M', 'Facturation', '2020-06-26 00:00:00');
+INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (4, 'Georges', 'Florent', 'LUX', 42, 'M', 'Facturation', '2001-02-14 00:00:00');
+INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (5, 'Muller', 'Patricia', 'ALL', 35, 'F', 'Informatique', '2011-05-14 00:00:00');
+INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (6, 'Cunha Teixeira', 'Cindy', 'PRT', 33, 'F', 'Secrétariat', '2016-06-09 00:00:00');
+INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (7, 'Kirsch', 'Claudine', 'ALL', 49, 'F', 'Direction', '1997-12-28 00:00:00');
+INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (8, 'Cunha', 'Carlos', 'PRT', 45, 'M', 'Facturation', '2015-09-07 00:00:00');
+INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (9, 'Torres', 'John', 'FRA', 32, 'M', 'Informatique', '2014-11-29 00:00:00');
+INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (10, 'Medina', 'Vincenzo', 'ESP', 28, 'M', 'Secrétariat', '2019-04-20 00:00:00');
+INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (11, 'Cloos', 'Edmond', 'LUX', 23, 'M', 'Achat', '2020-08-29 00:00:00');
+INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (12, 'Silva Machado', 'Eugène', 'PRT', 29, 'M', 'Direction', '2014-01-15 00:00:00');
+INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (13, 'Ipavec', 'Elsa', 'ESP', 55, 'F', 'Vente', '1991-06-24 00:00:00');
+INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (15, 'Weber', 'Jos', 'LUX', 32, 'M', 'Vente', '2018-03-06 00:00:00');
+INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (16, 'Tempels', 'Manuel', 'ALL', 26, 'M', null, '2016-10-19 00:00:00');
+INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (17, 'Muller', 'Henri', 'LUX', 43, 'M', 'Informatique', '2012-09-14 00:00:00');
+INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (18, 'Bruyn', 'Tessy', 'NED', 23, 'F', 'Marketing', '2020-05-05 00:00:00');
+INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (19, 'Flammang', 'Camille', 'LUX', 22, 'F', 'Technique', '2019-06-04 00:00:00');
+`
+},
+
+{
+label: 'Cours p. 96 ... 109 - Livre',
+value:
+`
+DROP TABLE IF EXISTS Livre ;
+CREATE TABLE Livre (
+	Numéro int NOT NULL, 	-- Numéro du livre (clé primaire)
+	Titre varchar(50),		-- Titre du livre
+	Auteur varchar(50),		-- Auteur du livre
+	Langue varchar(50),		-- Langue (ALL, FRA, ANG)
+	Genre varchar(50),		-- Genre du livre (Roman, Technique, Histoire, ...)
+	Prix int, 				-- Prix de vente du livre
+	EnStock int,			-- Quantité d'exemplaires en stock
+	PRIMARY KEY (Numéro)
+);
+
+INSERT INTO Livre (Numéro, Titre, Auteur, Langue, Genre, Prix, EnStock) VALUES (1, 'Teach yourself Java in 21 days', 'Albert Schmitt', 'ANG', 'Technique', 16, 55);
+INSERT INTO Livre (Numéro, Titre, Auteur, Langue, Genre, Prix, EnStock) VALUES (2, 'MS-Access 2.0', 'Bob Sebuilder', 'ANG', 'Technique', 33, 200);
+INSERT INTO Livre (Numéro, Titre, Auteur, Langue, Genre, Prix, EnStock) VALUES (3, 'MS-Access 2019', 'Bob Sebuilder', 'ANG', 'Technique', 33, 56);
+INSERT INTO Livre (Numéro, Titre, Auteur, Langue, Genre, Prix, EnStock) VALUES (4, 'New Windows 11', 'Camille Kamel', 'FRA', 'Technique', 16, 97);
+INSERT INTO Livre (Numéro, Titre, Auteur, Langue, Genre, Prix, EnStock) VALUES (5, 'Die Prüfung', 'Bill Kill', 'ALL', 'Roman', 21, 51);
+INSERT INTO Livre (Numéro, Titre, Auteur, Langue, Genre, Prix, EnStock) VALUES (6, 'Le micro … comment ça marche ?', 'Simon Scotch', 'FRA', 'Technique', 60, 12);
+INSERT INTO Livre (Numéro, Titre, Auteur, Langue, Genre, Prix, EnStock) VALUES (7, 'L''homme juste', 'Justa Klein', 'FRA', 'Roman', 20, 33);
+INSERT INTO Livre (Numéro, Titre, Auteur, Langue, Genre, Prix, EnStock) VALUES (8, 'Der letzte Zar', 'Vladimir Lenin', 'ALL', 'Histoire', 15, 3);
+INSERT INTO Livre (Numéro, Titre, Auteur, Langue, Genre, Prix, EnStock) VALUES (9, 'Novell Netware', 'Neon Tube', 'ANG', 'Technique', 28, 100);
+INSERT INTO Livre (Numéro, Titre, Auteur, Langue, Genre, Prix, EnStock) VALUES (10, 'Roter Drache', 'Sponge Bob', 'ALL', 'Roman', 17, 0);
+INSERT INTO Livre (Numéro, Titre, Auteur, Langue, Genre, Prix, EnStock) VALUES (11, 'Der Zerfall', 'Vladimir Lenin', 'ALL', 'Histoire', 37, 23);
+INSERT INTO Livre (Numéro, Titre, Auteur, Langue, Genre, Prix, EnStock) VALUES (12, 'Dracula', 'Vlad Tepes', 'FRA', 'Roman', 20, 50);
+INSERT INTO Livre (Numéro, Titre, Auteur, Langue, Genre, Prix, EnStock) VALUES (13, 'Schieb den …', 'Caroline Hoffmann', 'ALL', 'Roman', 15, 34);
+INSERT INTO Livre (Numéro, Titre, Auteur, Langue, Genre, Prix, EnStock) VALUES (14, '… zurück ins Meer', 'Jennifer Mattelet', 'ALL', 'Roman', 15, 34);
+INSERT INTO Livre (Numéro, Titre, Auteur, Langue, Genre, Prix, EnStock) VALUES (15, 'Windows 95', 'Pierre Godefroid', 'FRA', 'Technique', 50, 0);
+INSERT INTO Livre (Numéro, Titre, Auteur, Langue, Genre, Prix, EnStock) VALUES (16, 'Merry Christmas', 'Santa Claus', 'ANG', 'Roman', 75, 5);
+INSERT INTO Livre (Numéro, Titre, Auteur, Langue, Genre, Prix, EnStock) VALUES (17, 'Enter the Matrix', 'Trinity Nebu', 'ANG', 'Roman', 0, 0);	
+`
+},
+
+{
+label: 'Cours p. 131 ... 135 - Compte Banque',
+value:
+`
+DROP TABLE IF EXISTS Client ;
+CREATE TABLE Client (
+	NumClient int NOT NULL,
+	Nom varchar(255),
+	Prénom varchar(255),
+	PRIMARY KEY (NumClient)
+);
+
+INSERT INTO Client (NumClient, Nom, Prénom) VALUES (1, 'Pegaso', 'Emilio');
+INSERT INTO Client (NumClient, Nom, Prénom) VALUES (2, 'Weber', 'Jos');
+INSERT INTO Client (NumClient, Nom, Prénom) VALUES (3, 'Muller', 'Ketty');
+
+DROP TABLE IF EXISTS Compte ;
+CREATE TABLE Compte (
+	NumCompte int NOT NULL,
+	Valeur int,
+	NumClient int,
+	PRIMARY KEY (NumCompte),
+	CONSTRAINT ClientCompte FOREIGN KEY (NumClient) REFERENCES Client
+);
+
+INSERT INTO Compte (NumCompte, Valeur, NumClient) VALUES (101, 20000, 3);
+INSERT INTO Compte (NumCompte, Valeur, NumClient) VALUES (106, 48000, 2);
+INSERT INTO Compte (NumCompte, Valeur, NumClient) VALUES (112, 9000, 3);
+INSERT INTO Compte (NumCompte, Valeur, NumClient) VALUES (125, 5000, 1);
+
+
+-- original mysql commands (not workling in sqlite)
+-- ALTER TABLE Compte ADD CONSTRAINT ClientCompte FOREIGN KEY (NumClient) REFERENCES Client (NumClient) ON UPDATE SET NULL ON DELETE SET NULL;	
+`
+},
+
+{
+label: 'Cours p. 136 ... 149 - Agence',
+value:
+`
+DROP TABLE IF EXISTS Agence ;
+CREATE TABLE Agence (
+	NumAgence int NOT NULL,
+	Adresse varchar(255),
+	CP varchar(255),
+	Localité varchar(255),
+	PRIMARY KEY (NumAgence)
+);
+
+INSERT INTO Agence (NumAgence, Adresse, CP, Localité) VALUES (12, '15, bvd Royal', '5377', 'Luxemourg');
+INSERT INTO Agence (NumAgence, Adresse, CP, Localité) VALUES (24, '67, rue de l''Alzette', '8765', 'Esch-s-Alzette');
+INSERT INTO Agence (NumAgence, Adresse, CP, Localité) VALUES (30, '2, Grand Rue', '6678', 'Ettelbruck');
+
+DROP TABLE IF EXISTS Client ;
+CREATE TABLE Client (
+	NumClient int NOT NULL,
+	Nom varchar(255),
+	Prénom varchar(255),
+	Adresse varchar(255),
+	CP varchar(255),
+	Localité varchar(255),
+	PRIMARY KEY (NumClient)
+);
+
+INSERT INTO Client (NumClient, Nom, Prénom, Adresse, CP, Localité) VALUES (1, 'Pegaso', 'Emilio', '25, rue de la Gare', '2278', 'Diekirch');
+INSERT INTO Client (NumClient, Nom, Prénom, Adresse, CP, Localité) VALUES (2, 'Weber', 'Jos', '66a, Cité Paerchen', '1234', 'Schifflange');
+INSERT INTO Client (NumClient, Nom, Prénom, Adresse, CP, Localité) VALUES (3, 'Muller', 'Ketty', '102, av G. Diederich', '6690', 'Luxembourg');
+
+DROP TABLE IF EXISTS Compte ;
+CREATE TABLE Compte (
+	NumCompte int NOT NULL,
+	Valeur int,
+	NumAgence int,
+	NumClient int,
+	PRIMARY KEY (NumCompte),
+	CONSTRAINT AgenceCompte FOREIGN KEY (NumAgence) REFERENCES Agence (NumAgence),
+	CONSTRAINT ClientCompte FOREIGN KEY (NumClient) REFERENCES Client (NumClient)
+);
+
+INSERT INTO Compte (NumCompte, Valeur, NumAgence, NumClient) VALUES (101, 20000, 12, 3);
+INSERT INTO Compte (NumCompte, Valeur, NumAgence, NumClient) VALUES (106, 48000, 24, 2);
+INSERT INTO Compte (NumCompte, Valeur, NumAgence, NumClient) VALUES (112, 9000, 12, 3);
+INSERT INTO Compte (NumCompte, Valeur, NumAgence, NumClient) VALUES (125, 5000, 30, 1);
+
+-- original mysql commands (not workling in sqlite)
+-- ALTER TABLE Compte ADD CONSTRAINT AgenceCompte FOREIGN KEY (NumAgence) REFERENCES Agence (NumAgence) ON UPDATE SET NULL ON DELETE SET NULL;
+-- ALTER TABLE Compte ADD CONSTRAINT ClientCompte FOREIGN KEY (NumClient) REFERENCES Client (NumClient) ON UPDATE SET NULL ON DELETE SET NULL;
+`
+},
+
+// {
+// label: 'Exercice 0 - Supermarché',
+// value:
+// `
+		
+// `
+// },
+
+// {
+// label: 'Exercice 0 - Supermarché',
+// value:
+// `
+	
+// `
+// },
+
+// {
+// label: 'Exercice 0 - Supermarché',
+// value:
+// `
+		
+// `
+// },
+
+
 ];
 
 export default dbs;
