@@ -302,6 +302,7 @@ const syntaxError = ref(false);
 const currentTables = ref([]);
 const currentTableNames = ref([]);
 const currentTablesInfo = ref([]);
+const currentTableAndColumnNames = ref([]); // list of all table and column names
 
 // Define a reactive variable to store the message from the child component
 const message = ref('No db selected yet');
@@ -327,10 +328,17 @@ const executeDebouncedQuery = debounce(() => {
   query = replaceMSAccessDateLiterals(query);
 
   // only execute SELECT queries on the fly
-  if (query === '' || !query.toLowerCase().startsWith('select')) {
+  // parameter queries can't be executed on the fly
+  if (query === '' 
+      || !query.toLowerCase().startsWith('select')
+      || isParameterQuery(query) // check for MS Access parameter query ([..])
+    ) {
     userResult.value = null;
     syntaxError.value = false;
     feedback.value = '';
+    if (isParameterQuery(query)) {
+      feedback.value = 'Parameter query detected, on the fly execution not supported, please click the Run SQL button to execute the query.';
+    }
     return;
   }
 
@@ -371,13 +379,20 @@ const runQuery = () => {
 
   // sanitize query
   // trim spaces and comments (to end of line)
-  const query = sqlContent.value.trim().replace(/--.*\n/gm, '');
+  var query = sqlContent.value.trim().replace(/--.*\n/gm, '');
   // Replace MS Access date literals with SQL date format
   query = replaceMSAccessDateLiterals(query);
+
+  // check for MS Access parameter query ([..])
+  if (isParameterQuery(query)) {
+    query = updateParameterQuery(query);
+  }
 
   try {
     const result = db.exec(query);
     console.log(query)
+    userResult.value = result;
+    lastValidResult.value = result;
     syntaxError.value = false;
     // check if SELECT query
     if (query !== '' && !query.toLowerCase().startsWith('select')) {
@@ -401,6 +416,9 @@ const resetState = () => {
   syntaxError.value = false;
 };
 
+/**
+ * Load the initial tables from the database.
+ */
 const loadInitialTables = () => {
   const db = getDatabase();
   if (db) {
@@ -410,15 +428,29 @@ const loadInitialTables = () => {
 
     currentTables.value = []
     currentTablesInfo.value = []
-    for (name of currentTableNames.value) {
-      const result = db.exec(`SELECT * FROM ${name};`);
-      currentTables.value.push({label:name, value:result});
-      const resultInfo = db.exec(`PRAGMA table_info(${name})`);
-      currentTablesInfo.value.push({label:name, value:resultInfo[0].values});
+    currentTableAndColumnNames.value = [] // array of all field names
+    for (let tableNameArr of currentTableNames.value) {
+      const tableName = tableNameArr[0];
+      const result = db.exec(`SELECT * FROM ${tableName};`);
+      currentTables.value.push({label:tableName, value:result});
+      currentTableAndColumnNames.value.push(tableName);
+      // push all field names as single elements (... = spread operator)
+      currentTableAndColumnNames.value.push(...result[0].columns);
+      const resultInfo = db.exec(`PRAGMA table_info(${tableName})`);
+      currentTablesInfo.value.push({label:tableName, value:resultInfo[0].values});
     }
   }
+  // convert all names to lowercase
+  currentTableAndColumnNames.value = currentTableAndColumnNames.value.map(
+    x => x.toLowerCase()
+  );
+  // reevaluate query if db has changed
+  onQueryChange();
 };
 
+/**
+ * Hide/Show the table info section.
+ */
 const toggleTableInfo = () => {
   let elem = document.getElementById("shrink-btn-left");
   const leftSide = document.getElementById("left-side");
@@ -437,6 +469,9 @@ const toggleTableInfo = () => {
   }
 };
 
+/**
+ * Hide/Show the available tables section.
+ */
 const toggleAvailableTables = () => {
   let elem = document.getElementById("shrink-btn-right");
   const rightSide = document.getElementById("right-side");
@@ -461,46 +496,87 @@ const toggleAvailableTables = () => {
  * Replaces MS Access date literals with SQL date format.
  * @param {string} sqlExpression - The SQL expression to update.
  * @returns {string} The updated SQL expression.
+ * 
+ * MS Access date literals are typically enclosed in # symbols and follow 
+ * the format #MM/DD/YYYY# or #MM-DD-YYYY#. 
  */
-/*
-  https://chat.deepseek.com/
-  MS Access date literals are typically enclosed in # symbols and follow 
-  the format #MM/DD/YYYY# or #MM-DD-YYYY#. 
-
-  The Regex: #(\d{1,2})[\/-](\d{1,2})[\/-](\d{4})#:
-  - Captures the month (\d{1,2}), day (\d{1,2}), and year (\d{4}) into groups.
-  - Allows for one or two digits in the month and day.
-  - Works with both / and - as separators.
-  
-    further explanations:
-
-  - #: Matches the # symbol that starts the date literal.
-  - \d{1,2}: Matches exactly two digits (for the month).
-  - [\/-]: Matches either a / or - as the separator between month, day, and year.
-  - \d{1,2}: Matches exactly two digits (for the day).
-  - [\/-]: Matches either a / or - as the separator.
-  - \d{4}: Matches exactly four digits (for the year).
-  - #: Matches the # symbol that ends the date literal.
-  - g: The global flag to find all matches in the string.
-
-
-  .replace():
-  - The callback function is called for each match.
-  - The match is the full matched string (e.g., #1/1/2023#).
-  - month, day, and year are the captured groups.
-  - The padStart(2, '0') ensures that single-digit months and days are padded with a 
-    leading zero (e.g., 1 becomes 01).    
-*/
 const replaceMSAccessDateLiterals = (sqlExpression) => {  
+  // The Regex: #(\d{1,2})[\/-](\d{1,2})[\/-](\d{4})#:
+  // - #: Matches the # symbol that starts the date literal.
+  // - Captures the month (\d{1,2}), day (\d{1,2}), and year (\d{4}) into groups.
+  //   (month and day can be 1 or 2 digits, year is 4 digits)
+  // - [\/-]: Matches either a / or - as the separator between month, day, and year.
+  // - Allows for one or two digits in the month and day.
+  // - Works with both / and - as separators.
+  // - #: Matches the # symbol that ends the date literal.
+  // - g: The global flag to find all matches in the string.
   const regex = /#(\d{1,2})[\/-](\d{1,2})[\/-](\d{4})#/g;
+  // replace() calls the callback function for each match.
+  // - The match is the full matched string (e.g., #1/1/2023#).
+  // - month, day, and year are the captured groups.
   const updatedSql = sqlExpression.replace(regex, (match, month, day, year) => {
-    // Pad month and day with leading zeros if necessary
+    // Pad month and day with leading zeros if necessary (e.g., 1 becomes 01).    
     const paddedMonth = month.padStart(2, '0');
     const paddedDay = day.padStart(2, '0');
     // Format as SQL date: 'YYYY-MM-DD'
     return `'${year}-${paddedMonth}-${paddedDay}'`;
   }); 
   return updatedSql;
+}
+
+/**
+ * Function to check if we have an MS Access parameter query. Table and Column names
+ * between brackets are excluded.
+ * @param {string} sqlExpression - The SQL expression to check.
+ * @returns {boolean} True if the expression contains parameter queries, false otherwise.
+ */
+const isParameterQuery = (sqlExpression) => {
+  // Regex to match text between brackets that are not part of an AS clause
+  const regex = /(?<!\bAS\s)\[([^\]]+)\]/gi;
+
+  // count nb of parameters
+  let counter = 0;
+  const updatedQuery = sqlExpression.replace(regex, (match, paramName) => {
+    // known table and column names are excluded from count
+    if (currentTableAndColumnNames.value.includes(paramName.toLowerCase())) {
+      return match; // ignore column and table names
+    }
+    counter++;
+    return ' ';
+  });
+  return counter > 0;
+}
+
+/**
+ * Function to replace parameter queries with user input. Table and Column names
+ * between brackets are excluded.
+ * @param {string} sqlExpression - The SQL expression to check.
+ * @returns {string} the updated SQL expression.
+ */
+const updateParameterQuery = (sqlExpression) => {
+  // Regex to match text between brackets that are not part of an AS clause
+  const regex = /(?<!\bAS\s)\[([^\]]+)\]/gi;
+  // (?<!\bAS\s): Is a negative lookbehind assertion, it ensures that the bracketed
+  //    text is not preceded by the word AS (case-insensitive) followed by whitespace.
+  // \b ensures that AS is a whole word (not part of another word like PASS).
+  // \[([^\]]+)\]: Matches text between brackets ([...]) and captures the text inside
+  //    the brackets as a group (paramName).
+  // g: Global flag to match all occurrences.
+  // i: Case-insensitive flag to handle AS in any case (e.g., AS, as, As).
+
+  // Replace each match with a popup prompt
+  const updatedQuery = sqlExpression.replace(regex, (match, paramName) => {
+    // known table and column names are excluded from replacement
+    if (currentTableAndColumnNames.value.includes(paramName.toLowerCase())) {
+      return match; // Leave column and table names unchanged
+    }
+
+    // Prompt the user for input
+    const userInput = prompt(`Enter value for ${paramName}:`);
+    return `'${userInput}'`; // Wrap the input in single quotes for SQL compatibility
+  });
+
+  return updatedQuery;
 }
 
 
