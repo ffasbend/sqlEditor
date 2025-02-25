@@ -126,21 +126,21 @@ CREATE TABLE Client (
 	PRIMARY KEY (Numéro)
 );
 
-INSERT INTO Client (Numéro, Nom, Prénom, Sexe, Adresse, CP, Localité, NoTel, NoFax, DateNaiss, BonClient) VALUES (1, 'Hoffmann', 'Paule', 'F', '17, rue Joseph Lentz', 'L-5342', 'Esch/Alzette', '26522020', null, '1986-04-13 00:00:00', 0);
-INSERT INTO Client (Numéro, Nom, Prénom, Sexe, Adresse, CP, Localité, NoTel, NoFax, DateNaiss, BonClient) VALUES (2, 'Mattelet', 'Caroline', 'F', '6, rue Arthur Herchen', 'L-1727', 'Luxembourg', '26481757', null, '1986-08-19 00:00:00', 1);
-INSERT INTO Client (Numéro, Nom, Prénom, Sexe, Adresse, CP, Localité, NoTel, NoFax, DateNaiss, BonClient) VALUES (3, 'Schreiner', 'Claude', 'F', '5, rue du Bois', 'L-3453', 'Diekirch', '58476215', '58476217', '1950-01-26 00:00:00', 0);
-INSERT INTO Client (Numéro, Nom, Prénom, Sexe, Adresse, CP, Localité, NoTel, NoFax, DateNaiss, BonClient) VALUES (4, 'Flor', 'Magaly', 'F', '1, rue Principale', 'L-1832', 'Mersch', '458936', '458932', '1985-12-23 00:00:00', 1);
-INSERT INTO Client (Numéro, Nom, Prénom, Sexe, Adresse, CP, Localité, NoTel, NoFax, DateNaiss, BonClient) VALUES (5, 'Schreiner', 'Jean', 'M', '5, rue du Lac', 'L-3472', 'Mersch', '546897', null, '1969-09-15 00:00:00', 1);
-INSERT INTO Client (Numéro, Nom, Prénom, Sexe, Adresse, CP, Localité, NoTel, NoFax, DateNaiss, BonClient) VALUES (6, 'Brad', 'Pit', 'M', '2, rue de la Gare', 'L-9090', 'Ettelbruck', '707171', '707172', '2015-05-15 00:00:00', 0);
-INSERT INTO Client (Numéro, Nom, Prénom, Sexe, Adresse, CP, Localité, NoTel, NoFax, DateNaiss, BonClient) VALUES (7, 'Jemming', 'Martine', 'F', '13, rue du Pré', 'L-3336', 'Esch/Alzette', '596314', null, '1990-09-01 00:00:00', 1);
-INSERT INTO Client (Numéro, Nom, Prénom, Sexe, Adresse, CP, Localité, NoTel, NoFax, DateNaiss, BonClient) VALUES (8, 'Shark', 'Metti', 'M', null, 'L-6664', 'Esch/Alzette', null, null, '1955-05-19 00:00:00', 1);
-INSERT INTO Client (Numéro, Nom, Prénom, Sexe, Adresse, CP, Localité, NoTel, NoFax, DateNaiss, BonClient) VALUES (9, 'Super', 'Jemp', 'M', '7, Cité Patton', 'L-8897', 'Ettelbruck', '485739', null, '1980-12-31 00:00:00', 0);
-INSERT INTO Client (Numéro, Nom, Prénom, Sexe, Adresse, CP, Localité, NoTel, NoFax, DateNaiss, BonClient) VALUES (10, 'Rheude', 'Johanna', 'F', '9, Cité Patton', 'L-8897', 'Ettelbruck', '485720', '485721', '1975-02-18 00:00:00', 1);
-INSERT INTO Client (Numéro, Nom, Prénom, Sexe, Adresse, CP, Localité, NoTel, NoFax, DateNaiss, BonClient) VALUES (11, 'Susanj', 'Jeanne', 'F', '1, Cité Patton', 'F-348912', 'Metz', '25894769', null, '1980-07-12 00:00:00', 1);
-INSERT INTO Client (Numéro, Nom, Prénom, Sexe, Adresse, CP, Localité, NoTel, NoFax, DateNaiss, BonClient) VALUES (12, 'Sebuilder', 'Bob', 'M', '74, um Knopp', 'L-6512', 'Luxembourg', '547801', null, '1975-01-24 00:00:00', 0);
-INSERT INTO Client (Numéro, Nom, Prénom, Sexe, Adresse, CP, Localité, NoTel, NoFax, DateNaiss, BonClient) VALUES (13, 'Fischer', 'Antoine', 'M', '56, rue Gabriel Lippmann', 'L-1945', 'Luxembourg', '264815', '224824', '1964-12-03 00:00:00', 1);
-INSERT INTO Client (Numéro, Nom, Prénom, Sexe, Adresse, CP, Localité, NoTel, NoFax, DateNaiss, BonClient) VALUES (14, 'Tube', 'Neon', 'M', '4, rue du Château', 'L-4845', 'Luxembourg', '989898', '121212', '1965-12-12 00:00:00', 0);
-INSERT INTO Client (Numéro, Nom, Prénom, Sexe, Adresse, CP, Localité, NoTel, NoFax, DateNaiss, BonClient) VALUES (15, 'Messenger', 'Cameron', 'F', '5, rue Niel Armstrong', 'L-8228', 'Luxembourg', '666666', '666665', '1966-06-06 00:00:00', 1);
+INSERT INTO Client (Numéro, Nom, Prénom, Sexe, Adresse, CP, Localité, NoTel, NoFax, DateNaiss, BonClient) VALUES (1, 'Hoffmann', 'Paule', 'F', '17, rue Joseph Lentz', 'L-5342', 'Esch/Alzette', '26522020', null, '1986-04-13', 0);
+INSERT INTO Client (Numéro, Nom, Prénom, Sexe, Adresse, CP, Localité, NoTel, NoFax, DateNaiss, BonClient) VALUES (2, 'Mattelet', 'Caroline', 'F', '6, rue Arthur Herchen', 'L-1727', 'Luxembourg', '26481757', null, '1986-08-19', 1);
+INSERT INTO Client (Numéro, Nom, Prénom, Sexe, Adresse, CP, Localité, NoTel, NoFax, DateNaiss, BonClient) VALUES (3, 'Schreiner', 'Claude', 'F', '5, rue du Bois', 'L-3453', 'Diekirch', '58476215', '58476217', '1950-01-26', 0);
+INSERT INTO Client (Numéro, Nom, Prénom, Sexe, Adresse, CP, Localité, NoTel, NoFax, DateNaiss, BonClient) VALUES (4, 'Flor', 'Magaly', 'F', '1, rue Principale', 'L-1832', 'Mersch', '458936', '458932', '1985-12-23', 1);
+INSERT INTO Client (Numéro, Nom, Prénom, Sexe, Adresse, CP, Localité, NoTel, NoFax, DateNaiss, BonClient) VALUES (5, 'Schreiner', 'Jean', 'M', '5, rue du Lac', 'L-3472', 'Mersch', '546897', null, '1969-09-15', 1);
+INSERT INTO Client (Numéro, Nom, Prénom, Sexe, Adresse, CP, Localité, NoTel, NoFax, DateNaiss, BonClient) VALUES (6, 'Brad', 'Pit', 'M', '2, rue de la Gare', 'L-9090', 'Ettelbruck', '707171', '707172', '2015-05-15', 0);
+INSERT INTO Client (Numéro, Nom, Prénom, Sexe, Adresse, CP, Localité, NoTel, NoFax, DateNaiss, BonClient) VALUES (7, 'Jemming', 'Martine', 'F', '13, rue du Pré', 'L-3336', 'Esch/Alzette', '596314', null, '1990-09-01', 1);
+INSERT INTO Client (Numéro, Nom, Prénom, Sexe, Adresse, CP, Localité, NoTel, NoFax, DateNaiss, BonClient) VALUES (8, 'Shark', 'Metti', 'M', null, 'L-6664', 'Esch/Alzette', null, null, '1955-05-19', 1);
+INSERT INTO Client (Numéro, Nom, Prénom, Sexe, Adresse, CP, Localité, NoTel, NoFax, DateNaiss, BonClient) VALUES (9, 'Super', 'Jemp', 'M', '7, Cité Patton', 'L-8897', 'Ettelbruck', '485739', null, '1980-12-31', 0);
+INSERT INTO Client (Numéro, Nom, Prénom, Sexe, Adresse, CP, Localité, NoTel, NoFax, DateNaiss, BonClient) VALUES (10, 'Rheude', 'Johanna', 'F', '9, Cité Patton', 'L-8897', 'Ettelbruck', '485720', '485721', '1975-02-18', 1);
+INSERT INTO Client (Numéro, Nom, Prénom, Sexe, Adresse, CP, Localité, NoTel, NoFax, DateNaiss, BonClient) VALUES (11, 'Susanj', 'Jeanne', 'F', '1, Cité Patton', 'F-348912', 'Metz', '25894769', null, '1980-07-12', 1);
+INSERT INTO Client (Numéro, Nom, Prénom, Sexe, Adresse, CP, Localité, NoTel, NoFax, DateNaiss, BonClient) VALUES (12, 'Sebuilder', 'Bob', 'M', '74, um Knopp', 'L-6512', 'Luxembourg', '547801', null, '1975-01-24', 0);
+INSERT INTO Client (Numéro, Nom, Prénom, Sexe, Adresse, CP, Localité, NoTel, NoFax, DateNaiss, BonClient) VALUES (13, 'Fischer', 'Antoine', 'M', '56, rue Gabriel Lippmann', 'L-1945', 'Luxembourg', '264815', '224824', '1964-12-03', 1);
+INSERT INTO Client (Numéro, Nom, Prénom, Sexe, Adresse, CP, Localité, NoTel, NoFax, DateNaiss, BonClient) VALUES (14, 'Tube', 'Neon', 'M', '4, rue du Château', 'L-4845', 'Luxembourg', '989898', '121212', '1965-12-12', 0);
+INSERT INTO Client (Numéro, Nom, Prénom, Sexe, Adresse, CP, Localité, NoTel, NoFax, DateNaiss, BonClient) VALUES (15, 'Messenger', 'Cameron', 'F', '5, rue Niel Armstrong', 'L-8228', 'Luxembourg', '666666', '666665', '1966-06-06', 1);
   `
 },
 
@@ -163,17 +163,17 @@ CREATE TABLE Concert (
 	PRIMARY KEY (Numéro)
 );
 
-INSERT INTO Concert (Numéro, Artiste, Date, Début, Localité, Lieu, TypeLieu, PrixTicket, Places, TicketsVendus) VALUES (103, 'Kelly Family', '2022-07-13 00:00:00', '1899-12-30 19:00:00', 'Hupperdange', 'D''Scheier', 'Club', 15, 450, 449);
-INSERT INTO Concert (Numéro, Artiste, Date, Début, Localité, Lieu, TypeLieu, PrixTicket, Places, TicketsVendus) VALUES (104, 'Simply Red', '2022-07-15 00:00:00', '1899-12-30 21:00:00', 'Mondorf', 'Casino 500', 'Autre', 30, 700, 700);
-INSERT INTO Concert (Numéro, Artiste, Date, Début, Localité, Lieu, TypeLieu, PrixTicket, Places, TicketsVendus) VALUES (106, 'Marylin Manson', '2022-07-20 00:00:00', '1899-12-30 20:00:00', 'Dudelange', 'Centre Sportif', 'Hall Sportif', 25, 1900, 1900);
-INSERT INTO Concert (Numéro, Artiste, Date, Début, Localité, Lieu, TypeLieu, PrixTicket, Places, TicketsVendus) VALUES (108, 'Deep Purple', '2022-08-02 00:00:00', '1899-12-30 20:00:00', 'Bascharage', 'Hall 75', 'Centre Culturel', 25, 1400, 1097);
-INSERT INTO Concert (Numéro, Artiste, Date, Début, Localité, Lieu, TypeLieu, PrixTicket, Places, TicketsVendus) VALUES (109, 'Life of Agony / Tiamat', '2022-08-05 00:00:00', '1899-12-30 20:30:00', 'Luxembourg', 'Den Atelier', 'Club', 15, 1100, 360);
-INSERT INTO Concert (Numéro, Artiste, Date, Début, Localité, Lieu, TypeLieu, PrixTicket, Places, TicketsVendus) VALUES (110, 'Joe Cocker', '2022-08-12 00:00:00', '1899-12-30 20:00:00', 'Pétange', 'Centre Sportif', 'Hall Sportif', 45, 2200, 2200);
-INSERT INTO Concert (Numéro, Artiste, Date, Début, Localité, Lieu, TypeLieu, PrixTicket, Places, TicketsVendus) VALUES (111, 'Pulp', '2022-08-20 00:00:00', '1899-12-30 21:00:00', 'Luxembourg', 'Den Atelier', 'Club', 20, 1100, 470);
-INSERT INTO Concert (Numéro, Artiste, Date, Début, Localité, Lieu, TypeLieu, PrixTicket, Places, TicketsVendus) VALUES (101, 'Genesis', '2022-04-20 00:00:00', '1899-12-30 20:00:00', 'Luxembourg', 'Stade Josy Weber', 'Terrain de Football', 35, 9500, 6765);
-INSERT INTO Concert (Numéro, Artiste, Date, Début, Localité, Lieu, TypeLieu, PrixTicket, Places, TicketsVendus) VALUES (102, 'Bon Jovi', '2022-06-02 00:00:00', '1899-12-30 21:00:00', 'Luxembourg', 'Den Atelier', 'Club', 20, 1100, 1100);
-INSERT INTO Concert (Numéro, Artiste, Date, Début, Localité, Lieu, TypeLieu, PrixTicket, Places, TicketsVendus) VALUES (105, 'Indochine', '2022-07-16 00:00:00', '1899-12-30 21:30:00', 'Pétange', 'Centre Sportif', 'Hall Sportif', 20, 2200, 1290);
-INSERT INTO Concert (Numéro, Artiste, Date, Début, Localité, Lieu, TypeLieu, PrixTicket, Places, TicketsVendus) VALUES (107, 'U2', '2022-07-22 00:00:00', '1899-12-30 21:30:00', 'Diekirch', 'Fête sous tente', 'Autre', 8, 1800, 280);
+INSERT INTO Concert (Numéro, Artiste, Date, Début, Localité, Lieu, TypeLieu, PrixTicket, Places, TicketsVendus) VALUES (103, 'Kelly Family', '2022-07-13', '19:00:00', 'Hupperdange', 'D''Scheier', 'Club', 15, 450, 449);
+INSERT INTO Concert (Numéro, Artiste, Date, Début, Localité, Lieu, TypeLieu, PrixTicket, Places, TicketsVendus) VALUES (104, 'Simply Red', '2022-07-15', '21:00:00', 'Mondorf', 'Casino 500', 'Autre', 30, 700, 700);
+INSERT INTO Concert (Numéro, Artiste, Date, Début, Localité, Lieu, TypeLieu, PrixTicket, Places, TicketsVendus) VALUES (106, 'Marylin Manson', '2022-07-20', '20:00:00', 'Dudelange', 'Centre Sportif', 'Hall Sportif', 25, 1900, 1900);
+INSERT INTO Concert (Numéro, Artiste, Date, Début, Localité, Lieu, TypeLieu, PrixTicket, Places, TicketsVendus) VALUES (108, 'Deep Purple', '2022-08-02', '20:00:00', 'Bascharage', 'Hall 75', 'Centre Culturel', 25, 1400, 1097);
+INSERT INTO Concert (Numéro, Artiste, Date, Début, Localité, Lieu, TypeLieu, PrixTicket, Places, TicketsVendus) VALUES (109, 'Life of Agony / Tiamat', '2022-08-05', '20:30:00', 'Luxembourg', 'Den Atelier', 'Club', 15, 1100, 360);
+INSERT INTO Concert (Numéro, Artiste, Date, Début, Localité, Lieu, TypeLieu, PrixTicket, Places, TicketsVendus) VALUES (110, 'Joe Cocker', '2022-08-12', '20:00:00', 'Pétange', 'Centre Sportif', 'Hall Sportif', 45, 2200, 2200);
+INSERT INTO Concert (Numéro, Artiste, Date, Début, Localité, Lieu, TypeLieu, PrixTicket, Places, TicketsVendus) VALUES (111, 'Pulp', '2022-08-20', '21:00:00', 'Luxembourg', 'Den Atelier', 'Club', 20, 1100, 470);
+INSERT INTO Concert (Numéro, Artiste, Date, Début, Localité, Lieu, TypeLieu, PrixTicket, Places, TicketsVendus) VALUES (101, 'Genesis', '2022-04-20', '20:00:00', 'Luxembourg', 'Stade Josy Weber', 'Terrain de Football', 35, 9500, 6765);
+INSERT INTO Concert (Numéro, Artiste, Date, Début, Localité, Lieu, TypeLieu, PrixTicket, Places, TicketsVendus) VALUES (102, 'Bon Jovi', '2022-06-02', '21:00:00', 'Luxembourg', 'Den Atelier', 'Club', 20, 1100, 1100);
+INSERT INTO Concert (Numéro, Artiste, Date, Début, Localité, Lieu, TypeLieu, PrixTicket, Places, TicketsVendus) VALUES (105, 'Indochine', '2022-07-16', '21:30:00', 'Pétange', 'Centre Sportif', 'Hall Sportif', 20, 2200, 1290);
+INSERT INTO Concert (Numéro, Artiste, Date, Début, Localité, Lieu, TypeLieu, PrixTicket, Places, TicketsVendus) VALUES (107, 'U2', '2022-07-22', '21:30:00', 'Diekirch', 'Fête sous tente', 'Autre', 8, 1800, 280);
   `
 },
 
@@ -227,11 +227,11 @@ CREATE TABLE Contrat (
   CONSTRAINT ClientContrat FOREIGN KEY (NumClient) REFERENCES Client (NumClient)
 );
 
-INSERT INTO Contrat (NumContrat, Début, Fin, Prime, Pays, NumAgent, NumClient) VALUES (1000, '2022-07-22 00:00:00', '2022-08-03 00:00:00', 2300, 'France', 2, 10);
-INSERT INTO Contrat (NumContrat, Début, Fin, Prime, Pays, NumAgent, NumClient) VALUES (1001, '2022-07-12 00:00:00', '2022-07-22 00:00:00', 1750, 'Italie', 1, 11);
-INSERT INTO Contrat (NumContrat, Début, Fin, Prime, Pays, NumAgent, NumClient) VALUES (1002, '2022-07-19 00:00:00', '2022-08-18 00:00:00', 4500, 'Belgique', 1, 11);
-INSERT INTO Contrat (NumContrat, Début, Fin, Prime, Pays, NumAgent, NumClient) VALUES (1003, '2022-07-19 00:00:00', '2022-08-18 00:00:00', 3500, 'Italie', 2, 12);
-INSERT INTO Contrat (NumContrat, Début, Fin, Prime, Pays, NumAgent, NumClient) VALUES (1004, '2022-07-30 00:00:00', '2022-09-30 00:00:00', 1950, 'Italie', 2, 11);
+INSERT INTO Contrat (NumContrat, Début, Fin, Prime, Pays, NumAgent, NumClient) VALUES (1000, '2022-07-22', '2022-08-03', 2300, 'France', 2, 10);
+INSERT INTO Contrat (NumContrat, Début, Fin, Prime, Pays, NumAgent, NumClient) VALUES (1001, '2022-07-12', '2022-07-22', 1750, 'Italie', 1, 11);
+INSERT INTO Contrat (NumContrat, Début, Fin, Prime, Pays, NumAgent, NumClient) VALUES (1002, '2022-07-19', '2022-08-18', 4500, 'Belgique', 1, 11);
+INSERT INTO Contrat (NumContrat, Début, Fin, Prime, Pays, NumAgent, NumClient) VALUES (1003, '2022-07-19', '2022-08-18', 3500, 'Italie', 2, 12);
+INSERT INTO Contrat (NumContrat, Début, Fin, Prime, Pays, NumAgent, NumClient) VALUES (1004, '2022-07-30', '2022-09-30', 1950, 'Italie', 2, 11);
 
 -- original mysql commands (not workling in sqlite)
 -- ALTER TABLE Contrat ADD CONSTRAINT AgentContrat FOREIGN KEY (NumAgent) REFERENCES Agent (NumAgent) ON UPDATE SET NULL ON DELETE SET NULL;
@@ -331,67 +331,67 @@ CREATE TABLE Commande (
   CONSTRAINT ClientCommande FOREIGN KEY (NumClient) REFERENCES Client (NumClient)
 );
 
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (1, 25, '2022-01-12 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (2, 15, '2022-01-15 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (3, 15, '2022-01-16 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (4, 17, '2022-01-16 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (5, 16, '2022-02-01 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (6, 15, '2022-02-01 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (7, 30, '2022-02-08 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (8, 24, '2022-02-20 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (9, 9, '2022-02-22 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (10, 6, '2022-02-28 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (11, 20, '2022-03-01 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (12, 2, '2022-03-03 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (13, 29, '2022-03-15 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (14, 6, '2022-03-23 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (15, 13, '2022-03-25 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (16, 3, '2022-03-30 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (17, 3, '2022-04-02 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (18, 5, '2022-04-05 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (19, 8, '2022-04-13 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (20, 21, '2022-04-20 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (21, 14, '2022-04-25 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (22, 27, '2022-04-26 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (23, 23, '2022-05-03 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (24, 25, '2022-05-17 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (25, 12, '2022-05-20 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (26, 15, '2022-05-25 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (27, 6, '2022-05-30 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (28, 29, '2022-06-01 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (29, 10, '2022-06-05 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (30, 30, '2022-06-10 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (31, 3, '2022-06-15 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (32, 9, '2022-06-20 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (33, 7, '2022-06-30 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (34, 16, '2022-07-15 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (35, 3, '2022-07-15 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (36, 28, '2022-07-20 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (37, 27, '2022-07-22 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (38, 5, '2022-08-01 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (39, 24, '2022-08-03 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (40, 19, '2022-08-03 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (41, 22, '2022-08-08 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (42, 18, '2022-08-10 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (43, 15, '2022-08-19 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (44, 12, '2022-08-23 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (45, 6, '2022-08-27 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (46, 18, '2022-09-30 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (47, 5, '2022-09-30 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (48, 9, '2022-09-30 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (49, 16, '2022-10-15 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (50, 23, '2022-10-18 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (51, 15, '2022-10-20 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (52, 3, '2022-10-30 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (53, 2, '2022-11-05 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (54, 13, '2022-11-10 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (55, 24, '2022-11-20 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (56, 9, '2022-11-25 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (57, 22, '2022-11-30 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (58, 30, '2022-12-15 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (59, 6, '2022-12-24 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (60, 29, '2022-12-24 00:00:00');
-INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (61, 31, '2022-08-08 00:00:00');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (1, 25, '2022-01-12');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (2, 15, '2022-01-15');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (3, 15, '2022-01-16');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (4, 17, '2022-01-16');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (5, 16, '2022-02-01');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (6, 15, '2022-02-01');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (7, 30, '2022-02-08');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (8, 24, '2022-02-20');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (9, 9, '2022-02-22');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (10, 6, '2022-02-28');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (11, 20, '2022-03-01');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (12, 2, '2022-03-03');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (13, 29, '2022-03-15');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (14, 6, '2022-03-23');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (15, 13, '2022-03-25');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (16, 3, '2022-03-30');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (17, 3, '2022-04-02');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (18, 5, '2022-04-05');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (19, 8, '2022-04-13');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (20, 21, '2022-04-20');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (21, 14, '2022-04-25');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (22, 27, '2022-04-26');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (23, 23, '2022-05-03');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (24, 25, '2022-05-17');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (25, 12, '2022-05-20');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (26, 15, '2022-05-25');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (27, 6, '2022-05-30');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (28, 29, '2022-06-01');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (29, 10, '2022-06-05');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (30, 30, '2022-06-10');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (31, 3, '2022-06-15');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (32, 9, '2022-06-20');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (33, 7, '2022-06-30');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (34, 16, '2022-07-15');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (35, 3, '2022-07-15');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (36, 28, '2022-07-20');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (37, 27, '2022-07-22');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (38, 5, '2022-08-01');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (39, 24, '2022-08-03');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (40, 19, '2022-08-03');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (41, 22, '2022-08-08');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (42, 18, '2022-08-10');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (43, 15, '2022-08-19');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (44, 12, '2022-08-23');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (45, 6, '2022-08-27');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (46, 18, '2022-09-30');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (47, 5, '2022-09-30');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (48, 9, '2022-09-30');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (49, 16, '2022-10-15');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (50, 23, '2022-10-18');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (51, 15, '2022-10-20');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (52, 3, '2022-10-30');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (53, 2, '2022-11-05');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (54, 13, '2022-11-10');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (55, 24, '2022-11-20');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (56, 9, '2022-11-25');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (57, 22, '2022-11-30');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (58, 30, '2022-12-15');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (59, 6, '2022-12-24');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (60, 29, '2022-12-24');
+INSERT INTO Commande (NumCommande, NumClient, DateCommande) VALUES (61, 31, '2022-08-08');
 
 
 DROP TABLE IF EXISTS Concerner ;
@@ -535,30 +535,30 @@ CREATE TABLE Exemplaire (
   CONSTRAINT LivreExemplaire FOREIGN KEY (NumLivre) REFERENCES Livre (NumLivre)
 );
 
-INSERT INTO Exemplaire (NumExemplaire, NumLivre, DateAchat) VALUES (1, 1, '1998-02-13 00:00:00');
-INSERT INTO Exemplaire (NumExemplaire, NumLivre, DateAchat) VALUES (2, 6, '1998-06-06 00:00:00');
-INSERT INTO Exemplaire (NumExemplaire, NumLivre, DateAchat) VALUES (3, 3, '1998-03-19 00:00:00');
-INSERT INTO Exemplaire (NumExemplaire, NumLivre, DateAchat) VALUES (4, 8, '1998-03-19 00:00:00');
-INSERT INTO Exemplaire (NumExemplaire, NumLivre, DateAchat) VALUES (5, 9, '1998-02-02 00:00:00');
-INSERT INTO Exemplaire (NumExemplaire, NumLivre, DateAchat) VALUES (6, 4, '1998-01-01 00:00:00');
-INSERT INTO Exemplaire (NumExemplaire, NumLivre, DateAchat) VALUES (7, 2, '1998-06-06 00:00:00');
-INSERT INTO Exemplaire (NumExemplaire, NumLivre, DateAchat) VALUES (8, 5, '1998-09-02 00:00:00');
-INSERT INTO Exemplaire (NumExemplaire, NumLivre, DateAchat) VALUES (9, 3, '1998-08-19 00:00:00');
-INSERT INTO Exemplaire (NumExemplaire, NumLivre, DateAchat) VALUES (10, 7, '1998-01-01 00:00:00');
-INSERT INTO Exemplaire (NumExemplaire, NumLivre, DateAchat) VALUES (11, 9, '1998-10-19 00:00:00');
-INSERT INTO Exemplaire (NumExemplaire, NumLivre, DateAchat) VALUES (12, 1, '1998-02-13 00:00:00');
-INSERT INTO Exemplaire (NumExemplaire, NumLivre, DateAchat) VALUES (13, 2, '1998-09-02 00:00:00');
-INSERT INTO Exemplaire (NumExemplaire, NumLivre, DateAchat) VALUES (14, 4, '1998-08-19 00:00:00');
-INSERT INTO Exemplaire (NumExemplaire, NumLivre, DateAchat) VALUES (15, 5, '1998-10-11 00:00:00');
-INSERT INTO Exemplaire (NumExemplaire, NumLivre, DateAchat) VALUES (16, 6, '1998-03-24 00:00:00');
-INSERT INTO Exemplaire (NumExemplaire, NumLivre, DateAchat) VALUES (17, 7, '1998-02-13 00:00:00');
-INSERT INTO Exemplaire (NumExemplaire, NumLivre, DateAchat) VALUES (18, 6, '1998-06-06 00:00:00');
-INSERT INTO Exemplaire (NumExemplaire, NumLivre, DateAchat) VALUES (19, 5, '1998-12-24 00:00:00');
-INSERT INTO Exemplaire (NumExemplaire, NumLivre, DateAchat) VALUES (20, 4, '1998-08-19 00:00:00');
-INSERT INTO Exemplaire (NumExemplaire, NumLivre, DateAchat) VALUES (21, 6, '1998-02-10 00:00:00');
-INSERT INTO Exemplaire (NumExemplaire, NumLivre, DateAchat) VALUES (22, 11, '1998-01-26 00:00:00');
-INSERT INTO Exemplaire (NumExemplaire, NumLivre, DateAchat) VALUES (23, 11, '1998-02-28 00:00:00');
-INSERT INTO Exemplaire (NumExemplaire, NumLivre, DateAchat) VALUES (24, 9, '1998-12-19 00:00:00');
+INSERT INTO Exemplaire (NumExemplaire, NumLivre, DateAchat) VALUES (1, 1, '1998-02-13');
+INSERT INTO Exemplaire (NumExemplaire, NumLivre, DateAchat) VALUES (2, 6, '1998-06-06');
+INSERT INTO Exemplaire (NumExemplaire, NumLivre, DateAchat) VALUES (3, 3, '1998-03-19');
+INSERT INTO Exemplaire (NumExemplaire, NumLivre, DateAchat) VALUES (4, 8, '1998-03-19');
+INSERT INTO Exemplaire (NumExemplaire, NumLivre, DateAchat) VALUES (5, 9, '1998-02-02');
+INSERT INTO Exemplaire (NumExemplaire, NumLivre, DateAchat) VALUES (6, 4, '1998-01-01');
+INSERT INTO Exemplaire (NumExemplaire, NumLivre, DateAchat) VALUES (7, 2, '1998-06-06');
+INSERT INTO Exemplaire (NumExemplaire, NumLivre, DateAchat) VALUES (8, 5, '1998-09-02');
+INSERT INTO Exemplaire (NumExemplaire, NumLivre, DateAchat) VALUES (9, 3, '1998-08-19');
+INSERT INTO Exemplaire (NumExemplaire, NumLivre, DateAchat) VALUES (10, 7, '1998-01-01');
+INSERT INTO Exemplaire (NumExemplaire, NumLivre, DateAchat) VALUES (11, 9, '1998-10-19');
+INSERT INTO Exemplaire (NumExemplaire, NumLivre, DateAchat) VALUES (12, 1, '1998-02-13');
+INSERT INTO Exemplaire (NumExemplaire, NumLivre, DateAchat) VALUES (13, 2, '1998-09-02');
+INSERT INTO Exemplaire (NumExemplaire, NumLivre, DateAchat) VALUES (14, 4, '1998-08-19');
+INSERT INTO Exemplaire (NumExemplaire, NumLivre, DateAchat) VALUES (15, 5, '1998-10-11');
+INSERT INTO Exemplaire (NumExemplaire, NumLivre, DateAchat) VALUES (16, 6, '1998-03-24');
+INSERT INTO Exemplaire (NumExemplaire, NumLivre, DateAchat) VALUES (17, 7, '1998-02-13');
+INSERT INTO Exemplaire (NumExemplaire, NumLivre, DateAchat) VALUES (18, 6, '1998-06-06');
+INSERT INTO Exemplaire (NumExemplaire, NumLivre, DateAchat) VALUES (19, 5, '1998-12-24');
+INSERT INTO Exemplaire (NumExemplaire, NumLivre, DateAchat) VALUES (20, 4, '1998-08-19');
+INSERT INTO Exemplaire (NumExemplaire, NumLivre, DateAchat) VALUES (21, 6, '1998-02-10');
+INSERT INTO Exemplaire (NumExemplaire, NumLivre, DateAchat) VALUES (22, 11, '1998-01-26');
+INSERT INTO Exemplaire (NumExemplaire, NumLivre, DateAchat) VALUES (23, 11, '1998-02-28');
+INSERT INTO Exemplaire (NumExemplaire, NumLivre, DateAchat) VALUES (24, 9, '1998-12-19');
 
 
 DROP TABLE IF EXISTS AuteurLivre ;
@@ -628,24 +628,24 @@ CREATE TABLE Prêt (
   CONSTRAINT MembrePrêt FOREIGN KEY (NumMembre) REFERENCES Membre (NumMembre)
 );
 
-INSERT INTO Prêt (NumPrêt, NumExemplaire, NumMembre, DatePrêt, DateRetour) VALUES (1, 1, 9, '1998-02-19 00:00:00', '1998-02-26 00:00:00');
-INSERT INTO Prêt (NumPrêt, NumExemplaire, NumMembre, DatePrêt, DateRetour) VALUES (2, 6, 8, '1998-01-10 00:00:00', '1998-01-12 00:00:00');
-INSERT INTO Prêt (NumPrêt, NumExemplaire, NumMembre, DatePrêt, DateRetour) VALUES (3, 8, 7, '1998-09-02 00:00:00', '1998-09-09 00:00:00');
-INSERT INTO Prêt (NumPrêt, NumExemplaire, NumMembre, DatePrêt, DateRetour) VALUES (4, 4, 1, '1998-03-03 00:00:00', '1998-03-10 00:00:00');
-INSERT INTO Prêt (NumPrêt, NumExemplaire, NumMembre, DatePrêt, DateRetour) VALUES (5, 20, 2, '1998-10-16 00:00:00', '1998-10-17 00:00:00');
-INSERT INTO Prêt (NumPrêt, NumExemplaire, NumMembre, DatePrêt, DateRetour) VALUES (6, 13, 3, '1998-09-20 00:00:00', '1998-10-01 00:00:00');
-INSERT INTO Prêt (NumPrêt, NumExemplaire, NumMembre, DatePrêt, DateRetour) VALUES (7, 5, 6, '2005-03-06 00:00:00', '2005-03-08 00:00:00');
-INSERT INTO Prêt (NumPrêt, NumExemplaire, NumMembre, DatePrêt, DateRetour) VALUES (8, 10, 5, '1998-01-10 00:00:00', '1998-01-15 00:00:00');
-INSERT INTO Prêt (NumPrêt, NumExemplaire, NumMembre, DatePrêt, DateRetour) VALUES (9, 1, 4, '1998-02-01 00:00:00', '1998-02-10 00:00:00');
-INSERT INTO Prêt (NumPrêt, NumExemplaire, NumMembre, DatePrêt, DateRetour) VALUES (10, 14, 9, '1998-08-19 00:00:00', '1998-08-28 00:00:00');
-INSERT INTO Prêt (NumPrêt, NumExemplaire, NumMembre, DatePrêt, DateRetour) VALUES (11, 3, 8, '1998-03-24 00:00:00', '1998-03-31 00:00:00');
-INSERT INTO Prêt (NumPrêt, NumExemplaire, NumMembre, DatePrêt, DateRetour) VALUES (12, 7, 7, '1998-06-07 00:00:00', '1998-07-14 00:00:00');
-INSERT INTO Prêt (NumPrêt, NumExemplaire, NumMembre, DatePrêt, DateRetour) VALUES (13, 11, 1, '1998-10-20 00:00:00', '1998-10-22 00:00:00');
-INSERT INTO Prêt (NumPrêt, NumExemplaire, NumMembre, DatePrêt, DateRetour) VALUES (14, 16, 2, '1998-06-06 00:00:00', '1998-06-13 00:00:00');
-INSERT INTO Prêt (NumPrêt, NumExemplaire, NumMembre, DatePrêt, DateRetour) VALUES (15, 12, 3, '2005-03-04 00:00:00', '2005-03-09 00:00:00');
-INSERT INTO Prêt (NumPrêt, NumExemplaire, NumMembre, DatePrêt, DateRetour) VALUES (16, 22, 12, '1998-11-11 00:00:00', null);
-INSERT INTO Prêt (NumPrêt, NumExemplaire, NumMembre, DatePrêt, DateRetour) VALUES (17, 5, 3, '1998-05-03 00:00:00', null);
-INSERT INTO Prêt (NumPrêt, NumExemplaire, NumMembre, DatePrêt, DateRetour) VALUES (18, 19, 13, '1998-06-01 00:00:00', '1998-07-15 00:00:00');
+INSERT INTO Prêt (NumPrêt, NumExemplaire, NumMembre, DatePrêt, DateRetour) VALUES (1, 1, 9, '1998-02-19', '1998-02-26');
+INSERT INTO Prêt (NumPrêt, NumExemplaire, NumMembre, DatePrêt, DateRetour) VALUES (2, 6, 8, '1998-01-10', '1998-01-12');
+INSERT INTO Prêt (NumPrêt, NumExemplaire, NumMembre, DatePrêt, DateRetour) VALUES (3, 8, 7, '1998-09-02', '1998-09-09');
+INSERT INTO Prêt (NumPrêt, NumExemplaire, NumMembre, DatePrêt, DateRetour) VALUES (4, 4, 1, '1998-03-03', '1998-03-10');
+INSERT INTO Prêt (NumPrêt, NumExemplaire, NumMembre, DatePrêt, DateRetour) VALUES (5, 20, 2, '1998-10-16', '1998-10-17');
+INSERT INTO Prêt (NumPrêt, NumExemplaire, NumMembre, DatePrêt, DateRetour) VALUES (6, 13, 3, '1998-09-20', '1998-10-01');
+INSERT INTO Prêt (NumPrêt, NumExemplaire, NumMembre, DatePrêt, DateRetour) VALUES (7, 5, 6, '2005-03-06', '2005-03-08');
+INSERT INTO Prêt (NumPrêt, NumExemplaire, NumMembre, DatePrêt, DateRetour) VALUES (8, 10, 5, '1998-01-10', '1998-01-15');
+INSERT INTO Prêt (NumPrêt, NumExemplaire, NumMembre, DatePrêt, DateRetour) VALUES (9, 1, 4, '1998-02-01', '1998-02-10');
+INSERT INTO Prêt (NumPrêt, NumExemplaire, NumMembre, DatePrêt, DateRetour) VALUES (10, 14, 9, '1998-08-19', '1998-08-28');
+INSERT INTO Prêt (NumPrêt, NumExemplaire, NumMembre, DatePrêt, DateRetour) VALUES (11, 3, 8, '1998-03-24', '1998-03-31');
+INSERT INTO Prêt (NumPrêt, NumExemplaire, NumMembre, DatePrêt, DateRetour) VALUES (12, 7, 7, '1998-06-07', '1998-07-14');
+INSERT INTO Prêt (NumPrêt, NumExemplaire, NumMembre, DatePrêt, DateRetour) VALUES (13, 11, 1, '1998-10-20', '1998-10-22');
+INSERT INTO Prêt (NumPrêt, NumExemplaire, NumMembre, DatePrêt, DateRetour) VALUES (14, 16, 2, '1998-06-06', '1998-06-13');
+INSERT INTO Prêt (NumPrêt, NumExemplaire, NumMembre, DatePrêt, DateRetour) VALUES (15, 12, 3, '2005-03-04', '2005-03-09');
+INSERT INTO Prêt (NumPrêt, NumExemplaire, NumMembre, DatePrêt, DateRetour) VALUES (16, 22, 12, '1998-11-11', null);
+INSERT INTO Prêt (NumPrêt, NumExemplaire, NumMembre, DatePrêt, DateRetour) VALUES (17, 5, 3, '1998-05-03', null);
+INSERT INTO Prêt (NumPrêt, NumExemplaire, NumMembre, DatePrêt, DateRetour) VALUES (18, 19, 13, '1998-06-01', '1998-07-15');
 
 
 -- original mysql commands (not workling in sqlite)
@@ -673,25 +673,25 @@ CREATE TABLE Employé (
 	EntréeService datetime		-- Date d'entrée en service
 );
 
-INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (14, 'Reinert', 'Charles', 'ALL', 43, 'M', 'Marketing', '1997-03-21 00:00:00');
-INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (1, 'Wengler', 'Guy', 'LUX', 24, 'M', 'Comptabiltité', '2020-09-21 00:00:00');
-INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (2, 'Jurcevic', 'Alain', 'LUX', 28, 'M', 'Comptabiltité', '2016-09-02 00:00:00');
-INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (3, 'Ribeiro', 'Jean-Marie', 'PRT', 23, 'M', 'Facturation', '2020-06-26 00:00:00');
-INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (4, 'Georges', 'Florent', 'LUX', 42, 'M', 'Facturation', '2001-02-14 00:00:00');
-INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (5, 'Muller', 'Patricia', 'ALL', 35, 'F', 'Informatique', '2011-05-14 00:00:00');
-INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (6, 'Cunha Teixeira', 'Cindy', 'PRT', 33, 'F', 'Secrétariat', '2016-06-09 00:00:00');
-INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (7, 'Kirsch', 'Claudine', 'ALL', 49, 'F', 'Direction', '1997-12-28 00:00:00');
-INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (8, 'Cunha', 'Carlos', 'PRT', 45, 'M', 'Facturation', '2015-09-07 00:00:00');
-INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (9, 'Torres', 'John', 'FRA', 32, 'M', 'Informatique', '2014-11-29 00:00:00');
-INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (10, 'Medina', 'Vincenzo', 'ESP', 28, 'M', 'Secrétariat', '2019-04-20 00:00:00');
-INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (11, 'Cloos', 'Edmond', 'LUX', 23, 'M', 'Achat', '2020-08-29 00:00:00');
-INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (12, 'Silva Machado', 'Eugène', 'PRT', 29, 'M', 'Direction', '2014-01-15 00:00:00');
-INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (13, 'Ipavec', 'Elsa', 'ESP', 55, 'F', 'Vente', '1991-06-24 00:00:00');
-INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (15, 'Weber', 'Jos', 'LUX', 32, 'M', 'Vente', '2018-03-06 00:00:00');
-INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (16, 'Tempels', 'Manuel', 'ALL', 26, 'M', null, '2016-10-19 00:00:00');
-INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (17, 'Muller', 'Henri', 'LUX', 43, 'M', 'Informatique', '2012-09-14 00:00:00');
-INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (18, 'Bruyn', 'Tessy', 'NED', 23, 'F', 'Marketing', '2020-05-05 00:00:00');
-INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (19, 'Flammang', 'Camille', 'LUX', 22, 'F', 'Technique', '2019-06-04 00:00:00');
+INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (14, 'Reinert', 'Charles', 'ALL', 43, 'M', 'Marketing', '1997-03-21');
+INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (1, 'Wengler', 'Guy', 'LUX', 24, 'M', 'Comptabiltité', '2020-09-21');
+INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (2, 'Jurcevic', 'Alain', 'LUX', 28, 'M', 'Comptabiltité', '2016-09-02');
+INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (3, 'Ribeiro', 'Jean-Marie', 'PRT', 23, 'M', 'Facturation', '2020-06-26');
+INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (4, 'Georges', 'Florent', 'LUX', 42, 'M', 'Facturation', '2001-02-14');
+INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (5, 'Muller', 'Patricia', 'ALL', 35, 'F', 'Informatique', '2011-05-14');
+INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (6, 'Cunha Teixeira', 'Cindy', 'PRT', 33, 'F', 'Secrétariat', '2016-06-09');
+INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (7, 'Kirsch', 'Claudine', 'ALL', 49, 'F', 'Direction', '1997-12-28');
+INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (8, 'Cunha', 'Carlos', 'PRT', 45, 'M', 'Facturation', '2015-09-07');
+INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (9, 'Torres', 'John', 'FRA', 32, 'M', 'Informatique', '2014-11-29');
+INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (10, 'Medina', 'Vincenzo', 'ESP', 28, 'M', 'Secrétariat', '2019-04-20');
+INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (11, 'Cloos', 'Edmond', 'LUX', 23, 'M', 'Achat', '2020-08-29');
+INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (12, 'Silva Machado', 'Eugène', 'PRT', 29, 'M', 'Direction', '2014-01-15');
+INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (13, 'Ipavec', 'Elsa', 'ESP', 55, 'F', 'Vente', '1991-06-24');
+INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (15, 'Weber', 'Jos', 'LUX', 32, 'M', 'Vente', '2018-03-06');
+INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (16, 'Tempels', 'Manuel', 'ALL', 26, 'M', null, '2016-10-19');
+INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (17, 'Muller', 'Henri', 'LUX', 43, 'M', 'Informatique', '2012-09-14');
+INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (18, 'Bruyn', 'Tessy', 'NED', 23, 'F', 'Marketing', '2020-05-05');
+INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (19, 'Flammang', 'Camille', 'LUX', 22, 'F', 'Technique', '2019-06-04');
 `
 },
 
