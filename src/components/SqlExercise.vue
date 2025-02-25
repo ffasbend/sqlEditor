@@ -339,6 +339,7 @@ const executeDebouncedQuery = debounce(() => {
   } catch (error) {
     syntaxError.value = true;
     feedback.value = error.message;
+    userResult.value = null;
     console.error('SQL Syntax Error:', error);
   }
 }, 500);
