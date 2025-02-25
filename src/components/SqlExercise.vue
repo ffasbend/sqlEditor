@@ -119,6 +119,7 @@
             <h2>Input</h2>
           </div>
           <div class="editor-btn__wrapper header-bar">
+            <!-- Editor icons -->
             <!-- <ul class="editor-btn-list">
               <li class="editor-btn-list__item">
                 <button class="editor-btn">
@@ -319,9 +320,12 @@ const executeDebouncedQuery = debounce(() => {
   const db = getDatabase();
   if (!db) return;
 
+  // sanitize query
   // trim spaces and comments (to end of line)
-  const query = sqlContent.value.trim().replace(/--.*\n/gm, '');
-  
+  var query = sqlContent.value.trim().replace(/--.*\n/gm, '');  
+  // Replace MS Access date literals with SQL date format
+  query = replaceMSAccessDateLiterals(query);
+
   // only execute SELECT queries on the fly
   if (query === '' || !query.toLowerCase().startsWith('select')) {
     userResult.value = null;
@@ -332,6 +336,7 @@ const executeDebouncedQuery = debounce(() => {
 
   try {
     const result = db.exec(query);
+    console.log(query)
     userResult.value = result;
     lastValidResult.value = result;
     syntaxError.value = false;
@@ -340,7 +345,7 @@ const executeDebouncedQuery = debounce(() => {
     syntaxError.value = true;
     feedback.value = error.message;
     userResult.value = null;
-    console.error('SQL Syntax Error:', error);
+    // console.error('SQL Syntax Error:', error);
   }
 }, 500);
 
@@ -364,11 +369,15 @@ const runQuery = () => {
     return;
   }
 
+  // sanitize query
   // trim spaces and comments (to end of line)
   const query = sqlContent.value.trim().replace(/--.*\n/gm, '');
-  
+  // Replace MS Access date literals with SQL date format
+  query = replaceMSAccessDateLiterals(query);
+
   try {
     const result = db.exec(query);
+    console.log(query)
     syntaxError.value = false;
     // check if SELECT query
     if (query !== '' && !query.toLowerCase().startsWith('select')) {
@@ -381,7 +390,6 @@ const runQuery = () => {
   } catch (error) {
     syntaxError.value = true;
     feedback.value = error.message;
-    // console.error('SQL Syntax Error:', error);
   }
 };
 
@@ -448,6 +456,52 @@ const toggleAvailableTables = () => {
     // rightSide.children[0].style.display = "block";
   }
 };
+
+/**
+ * Replaces MS Access date literals with SQL date format.
+ * @param {string} sqlExpression - The SQL expression to update.
+ * @returns {string} The updated SQL expression.
+ */
+/*
+  https://chat.deepseek.com/
+  MS Access date literals are typically enclosed in # symbols and follow 
+  the format #MM/DD/YYYY# or #MM-DD-YYYY#. 
+
+  The Regex: #(\d{1,2})[\/-](\d{1,2})[\/-](\d{4})#:
+  - Captures the month (\d{1,2}), day (\d{1,2}), and year (\d{4}) into groups.
+  - Allows for one or two digits in the month and day.
+  - Works with both / and - as separators.
+  
+    further explanations:
+
+  - #: Matches the # symbol that starts the date literal.
+  - \d{1,2}: Matches exactly two digits (for the month).
+  - [\/-]: Matches either a / or - as the separator between month, day, and year.
+  - \d{1,2}: Matches exactly two digits (for the day).
+  - [\/-]: Matches either a / or - as the separator.
+  - \d{4}: Matches exactly four digits (for the year).
+  - #: Matches the # symbol that ends the date literal.
+  - g: The global flag to find all matches in the string.
+
+
+  .replace():
+  - The callback function is called for each match.
+  - The match is the full matched string (e.g., #1/1/2023#).
+  - month, day, and year are the captured groups.
+  - The padStart(2, '0') ensures that single-digit months and days are padded with a 
+    leading zero (e.g., 1 becomes 01).    
+*/
+const replaceMSAccessDateLiterals = (sqlExpression) => {  
+  const regex = /#(\d{1,2})[\/-](\d{1,2})[\/-](\d{4})#/g;
+  const updatedSql = sqlExpression.replace(regex, (match, month, day, year) => {
+    // Pad month and day with leading zeros if necessary
+    const paddedMonth = month.padStart(2, '0');
+    const paddedDay = day.padStart(2, '0');
+    // Format as SQL date: 'YYYY-MM-DD'
+    return `'${year}-${paddedMonth}-${paddedDay}'`;
+  }); 
+  return updatedSql;
+}
 
 
 onMounted(async () => {
