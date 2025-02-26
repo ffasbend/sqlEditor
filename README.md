@@ -29,7 +29,7 @@ Test live version on: https://sqleditor-ytmg.onrender.com
 ## On iPad or Touchpad (smaller screen)
 
 - The **Menu button** (top left) shows info about all tables.
-- The **Output** tab show the output from the current query.
+- The **Output** tab shows the output from the current query.
 - The **Available Tables** tab shows all tables and records.
 
 ## On Mobile (very small screen)

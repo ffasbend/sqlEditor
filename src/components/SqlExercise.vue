@@ -65,6 +65,27 @@
       </div>
     </div>
   </header>
+  
+  <!-- Help -->
+  <Drawer v-model:visible="visibleHelp" header="Online SQL Editor Help" position="top" style="height: auto" class="help-section">
+    <h2>General Info</h2>
+    <ul>
+      <li> SELECT queries (except parameter queries) are executed on the fly (live updates, including error messages).</li>
+      <li> INSERT, UPDATE and DELETE queries must be executed with the button <strong>RUN SQL</strong>.</li>
+    </ul>
+    <h2>Support for MS Access</h2>
+    <ul>
+      <li> MS Access wildcards (* and ?) in pattern-matching queries (LIKE queries) are supported.</li>
+      <li> MS Access date literals (#mm/dd/yyyy#) are supported (and converted to SQL date format internally).</li>
+      <li> MS Access parameter queries ([...]) are supported (values can be entered in popup window).</li>
+    </ul>
+    <h2>Small screen support</h2>
+    <ul>
+      <li> <strong>Menu button</strong> (top left): show info about all tables with data types.</li>
+      <li> <strong>Output</strong> tab: show output from the current query.</li>
+      <li> <strong>Available Tables</strong> tab: show all tables and records.</li>
+    </ul>
+  </Drawer>
 
   <!-- MOBILE - Table Info (left side drawer) -->
   <Drawer v-model:visible="visibleLeft" header="Table Infos">
@@ -81,8 +102,6 @@
         <TablesInfo 
           :tables="currentTablesInfo"
         />
-        <!-- <br class="mobile-view" /> -->
-        <!-- <div class="last-table-info"> -->
       </div>
     </div>
 
@@ -121,8 +140,24 @@
           </div>
           <div class="editor-btn__wrapper header-bar">
             <!-- Editor icons -->
-            <!-- <ul class="editor-btn-list">
+            <ul class="editor-btn-list">
               <li class="editor-btn-list__item">
+                <!-- Help text -->
+                <button class="editor-btn" @click="visibleHelp = true">
+                  <svg 
+                    width="18px" 
+                    height="18px" 
+                    viewBox="0 0 0.45 0.45" 
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path fill-rule="evenodd"
+                      d="M0 0.225C0 0.101 0.101 0 0.225 0s0.225 0.101 0.225 0.225 -0.101 0.225 -0.225 0.225S0 0.349 0 0.225m0.25 0.045H0.202v-0.003c0 -0.044 0.011 -0.051 0.031 -0.063q0.003 -0.002 0.007 -0.004c0.016 -0.01 0.029 -0.023 0.029 -0.042 0 -0.021 -0.017 -0.035 -0.037 -0.035 -0.019 0 -0.037 0.009 -0.039 0.034H0.142C0.143 0.106 0.184 0.079 0.232 0.079c0.052 0 0.088 0.033 0.088 0.078 0 0.031 -0.016 0.051 -0.041 0.066l-0.005 0.003c-0.018 0.011 -0.023 0.014 -0.023 0.04V0.27zm0.004 0.068a0.03 0.03 0 0 1 -0.03 0.03 0.03 0.03 0 0 1 -0.03 -0.03 0.03 0.03 0 0 1 0.03 -0.03c0.016 0 0.03 0.013 0.03 0.03z" 
+                      fill="#5C5F62"
+                      />
+                    </svg>                
+                </button>
+              </li>
+              <!-- <li class="editor-btn-list__item">
                 <button class="editor-btn">
                   <svg
                     width="18"
@@ -161,10 +196,10 @@
                       stroke-linecap="round"
                       stroke-linejoin="round"
                     ></path>
-                  </svg>
+                  </svg>                  
                 </button>
-              </li>
-            </ul> -->
+              </li> -->
+            </ul>
             <button 
               @click="runQuery"
               :disabled="syntaxError"
@@ -288,6 +323,7 @@ import TabPanel from 'primevue/tabpanel';
 
 
 const visibleLeft = ref(false)
+const visibleHelp = ref(false)
 
 
 // State variables
@@ -296,14 +332,14 @@ const feedback = ref('');
 const feedbackClass = ref('');
 const userResult = ref(null);
 let selected = ref('');     // sql to create selected db
-let initialTable = [];
 // var tableNames = ref([]);
 const syntaxError = ref(false);
 
 const currentTables = ref([]);
 const currentTableNames = ref([]);
 const currentTablesInfo = ref([]);
-const currentTableAndColumnNames = ref([]); // list of all table and column names
+// list of all table and column names (used in updateParameterQuery and isParameterQuery)
+const currentTableAndColumnNames = ref([]); 
 
 // Define a reactive variable to store the message from the child component
 const message = ref('No db selected yet');
@@ -387,7 +423,7 @@ const runQuery = () => {
   query = replaceMSAccessDateLiterals(query);
   // Replace MS Access wildcards with SQL wildcards
   query = convertAccessWildcardsToSQL(query);
-  
+
   // check for MS Access parameter query ([..])
   if (isParameterQuery(query)) {
     query = updateParameterQuery(query);
@@ -486,14 +522,12 @@ const toggleAvailableTables = () => {
     elem.classList.add("shrink-btn--left-side");
     rightSide.classList.remove("available-table__wrapper");
     rightSide.classList.add("hide-available-table__wrapper");
-    // rightSide.children[0].style.display = "none";
   } else {
     // right side hidden, show it
     elem.classList.remove("shrink-btn--left-side");
     elem.classList.add("shrink-btn--right");
     rightSide.classList.add("available-table__wrapper");
     rightSide.classList.remove("hide-available-table__wrapper");
-    // rightSide.children[0].style.display = "block";
   }
 };
 
