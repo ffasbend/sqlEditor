@@ -46,7 +46,8 @@ onMounted(() => {
     automaticLayout: true,
     fontSize: 14,
     tabSize: 2,
-    folding: false
+    folding: false, 
+    autoClosingBrackets:true,
   });
 // });
 

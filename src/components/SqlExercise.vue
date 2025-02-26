@@ -57,6 +57,7 @@
       <div class="select-db">
         <VueSelect
           v-model="selected"
+          inputId="select-db-input"
           :options="dbs"
           placeholder="Select a database"
           @option-selected="(option) => handleValueChange(option.value)"
