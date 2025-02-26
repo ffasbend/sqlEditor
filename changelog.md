@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v1.0.2] - 2025-02-26
+
+### Fixed
+
+- configure monaco editor to work with vite (use vite-plugin-monaco-editor)
+- remove unused node packages
+
 ## [v1.0.1] - 2025-02-25
 
 ### Added
