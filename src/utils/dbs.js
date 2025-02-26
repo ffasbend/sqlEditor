@@ -780,7 +780,7 @@ CREATE TABLE Agence (
 	PRIMARY KEY (NumAgence)
 );
 
-INSERT INTO Agence (NumAgence, Adresse, CP, Localité) VALUES (12, '15, bvd Royal', '5377', 'Luxemourg');
+INSERT INTO Agence (NumAgence, Adresse, CP, Localité) VALUES (12, '15, bvd Royal', '5377', 'Luxembourg');
 INSERT INTO Agence (NumAgence, Adresse, CP, Localité) VALUES (24, '67, rue de l''Alzette', '8765', 'Esch-s-Alzette');
 INSERT INTO Agence (NumAgence, Adresse, CP, Localité) VALUES (30, '2, Grand Rue', '6678', 'Ettelbruck');
 
