@@ -456,6 +456,7 @@ const runQuery = () => {
   } catch (error) {
     syntaxError.value = true;
     feedback.value = error.message;
+    userResult.value = null;
   }
 };
 
