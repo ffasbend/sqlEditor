@@ -4,6 +4,7 @@ import monacoEditorPlugin from 'vite-plugin-monaco-editor';
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: '', // base URL, make path relative
   plugins: [
     vue(),
     // https://classic.yarnpkg.com/en/package/vite-plugin-monaco-editor
