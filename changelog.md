@@ -18,6 +18,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+- Use Github Pages for live site
 - Change to relative website path in vite
 - Change favicon
 
