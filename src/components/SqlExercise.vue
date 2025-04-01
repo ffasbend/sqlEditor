@@ -358,7 +358,11 @@ const lastValidResult = ref(null);
  */
 const executeDebouncedQuery = debounce(() => {
   const db = getDatabase();
-  if (!db) return;
+  if (!db) {
+    feedback.value = 'Database not initialized.';
+    feedbackClass.value = 'alert alert-danger';
+    return;
+  }
 
   // sanitize query
   // trim spaces and comments (to end of line)
