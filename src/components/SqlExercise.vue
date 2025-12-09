@@ -67,7 +67,7 @@
   </header>
   
   <!-- Help -->
-  <Drawer v-model:visible="visibleHelp" header="Online SQL Editor Help" position="top" style="height: auto" class="help-section">
+  <Drawer v-model:visible="visibleHelp" header="Online SQL Editor Help (v1.0.5)" position="top" style="height: auto" class="help-section">
     <h2>General Info</h2>
     <ul>
       <li> SELECT queries (except parameter queries) are executed on the fly (live updates, including error messages).</li>
@@ -80,6 +80,7 @@
       A year can be entered as 2 or 4 digits (e.g., #12/31/99# or #12/31/1999#). <br />
           (2-digit year < 50 will be interpreted as 20.., 2-digit year >= 50 as 19..)
       </li>
+      <li> MS Access date functions YEAR(), MONTH(), DAY() are supported.</li>
       <li> MS Access parameter queries ([...]) are supported (values can be entered in popup window).</li>
     </ul>
     <h2>Small screen support</h2>
@@ -307,7 +308,7 @@
 
 <script setup>
 import { ref, onMounted, computed } from 'vue';
-import { initDatabase, getDatabase, replaceMSAccessDateLiterals, convertAccessWildcardsToSQL }
+import { initDatabase, getDatabase, replaceMSAccessDateLiterals, convertAccessWildcardsToSQL, convertMSAccessDateFunctions }
   from '../utils/database';
 import VueSelect from "vue3-select-component";
 import TableDisplay from './TableDisplay.vue';
@@ -374,6 +375,8 @@ const executeDebouncedQuery = debounce(() => {
   query = replaceMSAccessDateLiterals(query);
   // Replace MS Access wildcards with SQL wildcards
   query = convertAccessWildcardsToSQL(query);
+  // convert MS Access date functions to SQLite functions
+  query = convertMSAccessDateFunctions(query);
 
   // only execute SELECT queries on the fly
   // parameter queries can't be executed on the fly
@@ -442,6 +445,8 @@ console.log(query)
   query = replaceMSAccessDateLiterals(query);
   // Replace MS Access wildcards with SQL wildcards
   query = convertAccessWildcardsToSQL(query);
+  // convert MS Access date functions to SQLite functions
+  query = convertMSAccessDateFunctions(query);
 
   try {
     const result = db.exec(query);

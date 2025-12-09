@@ -62,6 +62,32 @@ export const replaceMSAccessDateLiterals = (sqlExpression) => {
   return updatedSql;
 }
 
+/**
+ * Converts MS Access date functions to SQLite (sql.js)
+ * @param {string} sqlExpression - The SQL expression to update.
+ * @returns {string} The updated SQL expression.
+ * 
+ * THe following MS Access date functions are converted 
+ * YEAR(date)	  -> strftime('%Y', date)
+ * MONTH(date)  -> strftime('%m', date)
+ * DAY(date)	  -> strftime('%d', date)
+ */
+export const convertMSAccessDateFunctions = (sql) => {  
+  return sql
+    // YEAR(x) → strftime('%Y', x)
+    .replace(/\bYEAR\s*\(\s*([^)]+)\s*\)/gi, "CAST(strftime('%Y', $1) AS INTEGER)")
+
+    // MONTH(x) → strftime('%m', x)
+    .replace(/\bMONTH\s*\(\s*([^)]+)\s*\)/gi, "CAST(strftime('%m', $1) AS INTEGER)")
+
+    // DAY(x) → strftime('%d', x)
+    .replace(/\bDAY\s*\(\s*([^)]+)\s*\)/gi, "CAST(strftime('%d', $1) AS INTEGER)")
+
+    // NOW() → CURRENT_TIMESTAMP
+    .replace(/\bNOW\s*\(\s*\)/gi, "CURRENT_TIMESTAMP");
+}
+
+
 
 /**
  * Converts MS Access wildcards to SQL wildcards in a LIKE clause.

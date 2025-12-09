@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v1.0.5] - 2025-12-09
+
+### Added
+
+- add support for MS Access date functions: YEAR(), MONTH(), DAY(), NOW()
+
 ## [v1.0.4] - 2025-12-09
 
 ### Added
