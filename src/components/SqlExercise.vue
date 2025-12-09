@@ -428,16 +428,17 @@ const runQuery = () => {
   // sanitize query
   // trim spaces and comments (to end of line)
   var query = sqlContent.value.trim().replace(/--.*\n/gm, '');
-  // Replace MS Access date literals with SQL date format
-  query = replaceMSAccessDateLiterals(query);
-  // Replace MS Access wildcards with SQL wildcards
-  query = convertAccessWildcardsToSQL(query);
-
+  
   // check for MS Access parameter query ([..])
   if (isParameterQuery(query)) {
     // ask for parameter values
     query = updateParameterQuery(query);
   }
+console.log(query)
+  // Replace MS Access date literals with SQL date format
+  query = replaceMSAccessDateLiterals(query);
+  // Replace MS Access wildcards with SQL wildcards
+  query = convertAccessWildcardsToSQL(query);
 
   try {
     const result = db.exec(query);
@@ -592,7 +593,17 @@ const updateParameterQuery = (sqlExpression) => {
 
     // Prompt the user for input
     const userInput = prompt(`Enter value for ${paramName}:`);
-    return `'${userInput}'`; // Wrap the input in single quotes for SQL compatibility
+    // regex to check for MS Access date literal
+    const re = /^#(0?[1-9]|1[0-2])\/(0?[1-9]|[12]\d|3[01])\/\d{2}(\d{2})?#$/;
+    if (userInput === null) {
+      console.log('null')
+      return match; // If user cancels, leave the original text unchanged
+    } else if (re.test(userInput.trim())) {
+      console.log('date', userInput)
+      return userInput.trim(); // If input is empty, replace with NULL
+    } else {
+      return `'${userInput}'`; // Wrap the input in single quotes for SQL compatibility
+    }
   });
 
   return updatedQuery;

@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 ## [v1.0.4] - 2025-12-09
 
+
+### Fixed
+
+- allow access dates in parameter queries
+
 ### Changed
 
 - replace old vite plugin for monaco editor with new one \
