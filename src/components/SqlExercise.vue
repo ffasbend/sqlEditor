@@ -76,7 +76,10 @@
     <h2>Support for MS Access</h2>
     <ul>
       <li> MS Access wildcards (* and ?) in pattern-matching queries (LIKE queries) are supported.</li>
-      <li> MS Access date literals (#mm/dd/yyyy#) are supported (and converted to SQL date format internally).</li>
+      <li> MS Access date literals (#mm/dd/yyyy#) are supported (and converted to SQL date format internally). <br />
+      A year can be entered as 2 or 4 digits (e.g., #12/31/99# or #12/31/1999#). <br />
+          (2-digit year < 50 will be interpreted as 20.., 2-digit year >= 50 as 19..)
+      </li>
       <li> MS Access parameter queries ([...]) are supported (values can be entered in popup window).</li>
     </ul>
     <h2>Small screen support</h2>

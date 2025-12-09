@@ -38,7 +38,13 @@ export const replaceMSAccessDateLiterals = (sqlExpression) => {
   // - Works with both / and - as separators.
   // - #: Matches the # symbol that ends the date literal.
   // - g: The global flag to find all matches in the string.
-  const regex = /#(\d{1,2})[\/-](\d{1,2})[\/-](\d{4})#/g;
+
+  // Allow 1, 2 (1950..2049) or 4 digit years
+  // 2-digit year < 50 will be interpreted as 20.., 2-digit year >= 50 as 19..
+  const regex = /#(\d{1,2})[\/-](\d{1,2})[\/-](\d{1,2}|\d{4})#/g;
+  // To allow only 4-digit years, use:
+  // const regex = /#(\d{1,2})[\/-](\d{1,2})[\/-](\d{4})#/g; // 
+
   // replace() calls the callback function for each match.
   // - The match is the full matched string (e.g., #1/1/2023#).
   // - month, day, and year are the captured groups.
@@ -46,8 +52,12 @@ export const replaceMSAccessDateLiterals = (sqlExpression) => {
     // Pad month and day with leading zeros if necessary (e.g., 1 becomes 01).    
     const paddedMonth = month.padStart(2, '0');
     const paddedDay = day.padStart(2, '0');
+    let paddedYear = parseInt(year, 10);
+    if (paddedYear < 100) {
+      paddedYear = year >= 50 ? 1900 + paddedYear : 2000 + paddedYear;
+    }
     // Format as SQL date: 'YYYY-MM-DD'
-    return `'${year}-${paddedMonth}-${paddedDay}'`;
+    return `'${paddedYear}-${paddedMonth}-${paddedDay}'`;
   }); 
   return updatedSql;
 }

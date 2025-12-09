@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 
 ## [v1.0.4] - 2025-12-09
 
+### Added
+
+- add support for MS Access dates with 1,2 or 4-digit years
 
 ### Fixed
 
