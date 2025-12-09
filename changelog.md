@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v1.0.4] - 2025-12-09
+
+### Changed
+
+- replace old vite plugin for monaco editor with new one \
+  (https://www.npmjs.com/package/vite-plugin-monaco-editor-esm)
+- npm uninstall vite-plugin-monaco-editor
+- npm install --save-dev vite-plugin-monaco-editor-esm
+
+
 ## [v1.0.3] - 2025-04-01
 
 ### Added
