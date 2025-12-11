@@ -440,7 +440,7 @@ const runQuery = () => {
     // ask for parameter values
     query = updateParameterQuery(query);
   }
-console.log(query)
+
   // Replace MS Access date literals with SQL date format
   query = replaceMSAccessDateLiterals(query);
   // Replace MS Access wildcards with SQL wildcards

@@ -24,7 +24,8 @@
     <h3>{{ label }}</h3>
     <ul class="table-info__content-details">
       <li v-for="(res, index) in result" :key="index">
-        <div style="display: flex; flex-wrap: wrap; gap: 2px">
+        <div style="display: flex; flex-wrap: wrap; gap: 2px"
+          v-bind:class="res[3] == 1 ? 'primary-key': ''">
           {{res[1] }}<span class="table-info__content-details--blue"
             >{{res[2]}}</span
           >

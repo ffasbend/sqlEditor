@@ -501,6 +501,13 @@ table tr td,table tr th {
     font-weight: 500
 }
 
+.table-info__content li div.primary-key {
+    padding-left: 16px;
+    position: relative;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
 .table-info__content li div:before {
     content: "";
     position: absolute;
