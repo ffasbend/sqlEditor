@@ -44,8 +44,8 @@ value:
 DROP TABLE IF EXISTS Produit;
 CREATE TABLE Produit (
 	Numéro int NOT NULL,
-	Libellé varchar(255),
-	Catégorie varchar(255),
+	Libellé varchar(255) COLLATE NOCASE,
+	Catégorie varchar(255) COLLATE NOCASE,
 	Prix float,
 	QuantitéDisponible int,
 	PRIMARY KEY (Numéro)
@@ -75,13 +75,13 @@ INSERT INTO Produit (Numéro, Libellé, Catégorie, Prix, QuantitéDisponible) V
 `
 DROP TABLE IF EXISTS Livre ;
 CREATE TABLE Livre (
-	Numéro int NOT NULL,  -- Numéro du livre (clé primaire)
-	Titre varchar(50),    -- Titre du livre
-	Auteur varchar(50),   -- Auteur du livre
-	Langue varchar(50),   -- Langue du livre  (FRA, ANG, ALL)
-	Genre varchar(50),    -- Genre du livre (Technique, Roman, Histoire, ...)
-	Prix float,           -- Prix de vente du livre
-	EnStock int,          -- Quantité d'exemplaires en stock
+	Numéro int NOT NULL,                 -- Numéro du livre (clé primaire)
+	Titre varchar(50) COLLATE NOCASE,    -- Titre du livre
+	Auteur varchar(50) COLLATE NOCASE,   -- Auteur du livre
+	Langue varchar(50) COLLATE NOCASE,   -- Langue du livre  (FRA, ANG, ALL)
+	Genre varchar(50) COLLATE NOCASE,    -- Genre du livre (Technique, Roman, Histoire, ...)
+	Prix float,                          -- Prix de vente du livre
+	EnStock int,                         -- Quantité d'exemplaires en stock
 	PRIMARY KEY (Numéro)
 );
 
@@ -112,17 +112,17 @@ INSERT INTO Livre (Numéro, Titre, Auteur, Langue, Genre, Prix, EnStock) VALUES 
   `
 DROP TABLE IF EXISTS Client;
 CREATE TABLE Client (
-	Numéro int NOT NULL,      -- Numéro du client
-	Nom varchar(50),          -- Nom du client
-	Prénom varchar(50),       -- Prénom du Client
-	Sexe varchar(50),         -- Sexe du client (F/M)
-	Adresse varchar(50),      -- Rue et numéro
-	CP varchar(50),           -- Code postal
-	Localité varchar(50),     -- Localité du client
-	NoTel varchar(50),        -- Numéro de téléphone du client
-	NoFax varchar(50),        -- Numéro du fax du client
-	DateNaiss datetime,       -- Date de naissance du client
-	BonClient char,           -- Valeurs possibles: YES/NO
+	Numéro int NOT NULL,				    -- Numéro du client
+	Nom varchar(50) COLLATE NOCASE,         -- Nom du client
+	Prénom varchar(50) COLLATE NOCASE,      -- Prénom du Client
+	Sexe varchar(50) COLLATE NOCASE,        -- Sexe du client (F/M)
+	Adresse varchar(50) COLLATE NOCASE,     -- Rue et numéro
+	CP varchar(50) COLLATE NOCASE,          -- Code postal
+	Localité varchar(50) COLLATE NOCASE,	-- Localité du client
+	NoTel varchar(50) COLLATE NOCASE,       -- Numéro de téléphone du client
+	NoFax varchar(50) COLLATE NOCASE,       -- Numéro du fax du client
+	DateNaiss datetime,                     -- Date de naissance du client
+	BonClient char COLLATE NOCASE,          -- Valeurs possibles: YES/NO
 	PRIMARY KEY (Numéro)
 );
 
@@ -150,16 +150,16 @@ INSERT INTO Client (Numéro, Nom, Prénom, Sexe, Adresse, CP, Localité, NoTel, 
   `
 DROP TABLE IF EXISTS Concert ;
 CREATE TABLE Concert (
-	Numéro int NOT NULL,    -- Numéro d'identification (clé primaire)
-	Artiste varchar(50),    -- Artiste ou Groupe qui donne le concert
-	Date datetime,          -- Date du concert
-	Début datetime,         -- Début du concert (Heure)
-	Localité varchar(50),   -- Localité du concert
-	Lieu varchar(50),       -- Lieu du concert
-	TypeLieu varchar(50),   -- (Centre Culturel, Hall Sportif, Club etc.)
-	PrixTicket float,       -- Prix d'un ticket
-	Places int,             -- Total des places disponibles pour le concert
-	TicketsVendus int,      -- Nombre de tickets déjà vendus pour le concert
+	Numéro int NOT NULL,                    -- Numéro d'identification (clé primaire)
+	Artiste varchar(50) COLLATE NOCASE,     -- Artiste ou Groupe qui donne le concert
+	Date datetime,                          -- Date du concert
+	Début datetime,                         -- Début du concert (Heure)
+	Localité varchar(50) COLLATE NOCASE,    -- Localité du concert
+	Lieu varchar(50) COLLATE NOCASE,        -- Lieu du concert
+	TypeLieu varchar(50) COLLATE NOCASE,    -- (Centre Culturel, Hall Sportif, Club etc.)
+	PrixTicket float,                       -- Prix d'un ticket
+	Places int,                             -- Total des places disponibles pour le concert
+	TicketsVendus int,                      -- Nombre de tickets déjà vendus pour le concert
 	PRIMARY KEY (Numéro)
 );
 
@@ -184,13 +184,13 @@ INSERT INTO Concert (Numéro, Artiste, Date, Début, Localité, Lieu, TypeLieu, 
 DROP TABLE IF EXISTS Agent ;
 CREATE TABLE Agent (
 	NumAgent int NOT NULL,
-	Nom varchar(50),
-	Prénom varchar(50),
-	Adresse varchar(50),
-	CP varchar(50),
-	Localité varchar(50),
-	NoTel varchar(50),
-	AgentGénéral char,
+	Nom varchar(50) COLLATE NOCASE,
+	Prénom varchar(50) COLLATE NOCASE,
+	Adresse varchar(50) COLLATE NOCASE,
+	CP varchar(50) COLLATE NOCASE,
+	Localité varchar(50) COLLATE NOCASE,
+	NoTel varchar(50) COLLATE NOCASE,
+	AgentGénéral char COLLATE NOCASE,
 	PRIMARY KEY (NumAgent)
 );
 
@@ -200,12 +200,12 @@ INSERT INTO Agent (NumAgent, Nom, Prénom, Adresse, CP, Localité, NoTel, AgentG
 DROP TABLE IF EXISTS Client ;
 CREATE TABLE Client (
 	NumClient int NOT NULL,
-	Nom varchar(50),
-	Prénom varchar(50),
-	Adresse varchar(50),
-	CP varchar(50),
-	Localité varchar(50),
-	NoTel varchar(50),
+	Nom varchar(50) COLLATE NOCASE,
+	Prénom varchar(50) COLLATE NOCASE,
+	Adresse varchar(50) COLLATE NOCASE,
+	CP varchar(50) COLLATE NOCASE,
+	Localité varchar(50) COLLATE NOCASE,
+	NoTel varchar(50) COLLATE NOCASE,
 	PRIMARY KEY (NumClient)
 );
 
@@ -219,7 +219,7 @@ CREATE TABLE Contrat (
 	Début datetime,
 	Fin datetime,
 	Prime int,
-	Pays varchar(50),
+	Pays varchar(50) COLLATE NOCASE,
 	NumAgent int,
 	NumClient int,
 	PRIMARY KEY (NumContrat),
@@ -246,7 +246,7 @@ INSERT INTO Contrat (NumContrat, Début, Fin, Prime, Pays, NumAgent, NumClient) 
 DROP TABLE IF EXISTS Article ;
 CREATE TABLE Article (
 	NumArticle int NOT NULL,  -- Numéro de l'article (clé primaire)
-	Libellé varchar(50),
+	Libellé varchar(50) COLLATE NOCASE,
 	PrixUnitaire int,
 	PRIMARY KEY (NumArticle)
 );
@@ -281,11 +281,11 @@ INSERT INTO Article (NumArticle, Libellé, PrixUnitaire) VALUES (25, 'Coffee-Sen
 DROP TABLE IF EXISTS Client ;
 CREATE TABLE Client (
 	NumClient int NOT NULL,   -- Numéro du client (clé primaire)
-	Nom varchar(50),
-	Prénom varchar(50),
-	Adresse varchar(50),
-	CP varchar(50),
-	Localité varchar(50),
+	Nom varchar(50) COLLATE NOCASE,
+	Prénom varchar(50) COLLATE NOCASE,
+	Adresse varchar(50) COLLATE NOCASE,
+	CP varchar(50) COLLATE NOCASE,
+	Localité varchar(50) COLLATE NOCASE,
 	PRIMARY KEY (NumClient)
 );
 
@@ -480,9 +480,9 @@ value:
 DROP TABLE IF EXISTS Auteur ;
 CREATE TABLE Auteur (
 	NumAuteur int NOT NULL,   -- Numéro de l'auteur (clé primaire)
-	Nom varchar(50),
-	Prénom varchar(50),
-	Nationalité varchar(50),
+	Nom varchar(50) COLLATE NOCASE,
+	Prénom varchar(50) COLLATE NOCASE,
+	Nationalité varchar(50) COLLATE NOCASE,
 	PRIMARY KEY (NumAuteur)
 );
 
@@ -506,10 +506,10 @@ INSERT INTO Auteur (NumAuteur, Nom, Prénom, Nationalité) VALUES (16, 'Firgau',
 
 DROP TABLE IF EXISTS Livre ;
 CREATE TABLE Livre (
-	NumLivre int NOT NULL,  -- Numéro du livre (clé primaire)
-	Titre varchar(50),
-	Genre varchar(50),      -- Roman, Policier, Action, ...
-	Langue varchar(50),     -- ALL, ANG, FRA, AUT, ...
+	NumLivre int NOT NULL,                 -- Numéro du livre (clé primaire)
+	Titre varchar(50) COLLATE NOCASE,      -- Titre du livre
+	Genre varchar(50) COLLATE NOCASE,      -- Roman, Policier, Action, ...
+	Langue varchar(50) COLLATE NOCASE,     -- ALL, ANG, FRA, AUT, ...
 	PRIMARY KEY (NumLivre)
 );
 
@@ -593,11 +593,11 @@ INSERT INTO AuteurLivre (NumAuteur, NumLivre) VALUES (16, 11);
 DROP TABLE IF EXISTS Membre ;
 CREATE TABLE Membre (
 	NumMembre int NOT NULL,   -- Numéro du membre (clé primaire)
-	Nom varchar(50),
-	Prénom varchar(50),
-	Adresse varchar(50),
-	CP varchar(50),
-	Localité varchar(50),
+	Nom varchar(50) COLLATE NOCASE,
+	Prénom varchar(50) COLLATE NOCASE,
+	Adresse varchar(50) COLLATE NOCASE,
+	CP varchar(50) COLLATE NOCASE,
+	Localité varchar(50) COLLATE NOCASE,
 	PRIMARY KEY (NumMembre)
 );
 
@@ -663,14 +663,14 @@ value:
 `
 DROP TABLE IF EXISTS Employé ;
 CREATE TABLE Employé (
-	Numéro float,				-- Numéro de l'employé (clé primaire)
-	Nom varchar(255),			-- Nom de l'employé'
-	Prénom varchar(255),		-- Prénom de l'employé
-	Nationalité varchar(255), 	-- Nationalité de l'employé
-	Age float,					-- Age de l'employé
-	Sexe varchar(255),			-- Sexe de l'employé (M/F)
-	Service varchar(255),		-- Service auquel l'employé est affecté
-	EntréeService datetime		-- Date d'entrée en service
+	Numéro float,				                -- Numéro de l'employé (clé primaire)
+	Nom varchar(255) COLLATE NOCASE,			-- Nom de l'employé'
+	Prénom varchar(255) COLLATE NOCASE,	        -- Prénom de l'employé
+	Nationalité varchar(255) COLLATE NOCASE, 	-- Nationalité de l'employé
+	Age float,					                -- Age de l'employé
+	Sexe varchar(255) COLLATE NOCASE,			-- Sexe de l'employé (M/F)
+	Service varchar(255) COLLATE NOCASE,		-- Service auquel l'employé est affecté
+	EntréeService datetime		                -- Date d'entrée en service
 );
 
 INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (14, 'Reinert', 'Charles', 'ALL', 43, 'M', 'Marketing', '1997-03-21');
@@ -701,13 +701,13 @@ value:
 `
 DROP TABLE IF EXISTS Livre ;
 CREATE TABLE Livre (
-	Numéro int NOT NULL, 	-- Numéro du livre (clé primaire)
-	Titre varchar(50),		-- Titre du livre
-	Auteur varchar(50),		-- Auteur du livre
-	Langue varchar(50),		-- Langue (ALL, FRA, ANG)
-	Genre varchar(50),		-- Genre du livre (Roman, Technique, Histoire, ...)
-	Prix int, 				-- Prix de vente du livre
-	EnStock int,			-- Quantité d'exemplaires en stock
+	Numéro int NOT NULL, 	            -- Numéro du livre (clé primaire)
+	Titre varchar(50) COLLATE NOCASE,	-- Titre du livre
+	Auteur varchar(50) COLLATE NOCASE,	-- Auteur du livre
+	Langue varchar(50) COLLATE NOCASE,	-- Langue (ALL, FRA, ANG)
+	Genre varchar(50) COLLATE NOCASE,   -- Genre du livre (Roman, Technique, Histoire, ...)
+	Prix int, 				            -- Prix de vente du livre
+	EnStock int,			            -- Quantité d'exemplaires en stock
 	PRIMARY KEY (Numéro)
 );
 
@@ -738,8 +738,8 @@ value:
 DROP TABLE IF EXISTS Client ;
 CREATE TABLE Client (
 	NumClient int NOT NULL,
-	Nom varchar(255),
-	Prénom varchar(255),
+	Nom varchar(255) COLLATE NOCASE,
+	Prénom varchar(255) COLLATE NOCASE,
 	PRIMARY KEY (NumClient)
 );
 
@@ -774,9 +774,9 @@ value:
 DROP TABLE IF EXISTS Agence ;
 CREATE TABLE Agence (
 	NumAgence int NOT NULL,
-	Adresse varchar(255),
-	CP varchar(255),
-	Localité varchar(255),
+	Adresse varchar(255) COLLATE NOCASE,
+	CP varchar(255) COLLATE NOCASE,
+	Localité varchar(255) COLLATE NOCASE,
 	PRIMARY KEY (NumAgence)
 );
 
@@ -787,11 +787,11 @@ INSERT INTO Agence (NumAgence, Adresse, CP, Localité) VALUES (30, '2, Grand Rue
 DROP TABLE IF EXISTS Client ;
 CREATE TABLE Client (
 	NumClient int NOT NULL,
-	Nom varchar(255),
-	Prénom varchar(255),
-	Adresse varchar(255),
-	CP varchar(255),
-	Localité varchar(255),
+	Nom varchar(255) COLLATE NOCASE,
+	Prénom varchar(255) COLLATE NOCASE,
+	Adresse varchar(255) COLLATE NOCASE,
+	CP varchar(255) COLLATE NOCASE,
+	Localité varchar(255) COLLATE NOCASE,
 	PRIMARY KEY (NumClient)
 );
 
