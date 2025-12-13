@@ -1,10 +1,10 @@
 <!-- src/components/TablesDisplay.vue -->
 <template>
   <div v-if="tables && tables.length">
-    <div v-for="name in tables" class="table-area">
-      <h3 class="table-name">{{ name.label }}</h3>
+    <div v-for="table in tables" class="table-area">
+      <h3 class="table-name">{{ table.tableName }}</h3>
       <div class="table-data">
-        <TableDisplay :result="name.value" />
+        <TableDisplay :result="table" />
       </div>
     </div>
   </div>

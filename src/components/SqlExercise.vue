@@ -94,7 +94,7 @@
   <!-- MOBILE - Table Info (left side drawer) -->
   <Drawer v-model:visible="visibleLeft" header="Table Infos">
     <TablesInfo 
-          :tables="currentTablesInfo"
+      :tables="currentDb.tables"
     />
   </Drawer>
 
@@ -104,7 +104,7 @@
     <div id="left-side" class="table-info__wrapper pc-view">
       <div class="container">
         <TablesInfo 
-          :tables="currentTablesInfo"
+          :tables="currentDb.tables"
         />
       </div>
     </div>
@@ -256,7 +256,7 @@
           <div class="output-area__table">
             <!-- User Query Result -->
             <div v-if="userResult && userResult.length" class="mt-4">
-              <TableDisplay :result="userResult" />
+              <ResultDisplay :result="userResult" />
             </div>
           </div>
           <p class="success-message"></p>
@@ -286,7 +286,7 @@
             <!-- MOBILE - Available Tables Display -->
             <TabPanel value="1" class="available-tables">
               <TablesDisplay 
-                :tables="currentTables"
+                :tables="currentDb.tables"
               />
             </TabPanel>
         </TabPanels>
@@ -298,7 +298,7 @@
       <h2 class="section-table-title header-bar">Available Tables</h2>
       <div class="available-tables">
         <TablesDisplay 
-          :tables="currentTables"
+          :tables="currentDb.tables"
         />
       </div>
     </div>
@@ -314,6 +314,7 @@ import VueSelect from "vue3-select-component";
 import TableDisplay from './TableDisplay.vue';
 import TablesDisplay from './TablesDisplay.vue';
 import TablesInfo from './TablesInfo.vue';
+import ResultDisplay from './ResultDisplay.vue';
 import SqlEditor from './SqlEditor.vue';
 import debounce from '../utils/debounce';
 import dbs from '../utils/dbs';
@@ -325,6 +326,12 @@ import TabList from 'primevue/tablist';
 import Tab from 'primevue/tab';
 import TabPanels from 'primevue/tabpanels';
 import TabPanel from 'primevue/tabpanel';
+
+
+
+import { CurrentDB } from "../classes/CurrentDB";
+
+
 
 // Reactive variables to show the left side panel or the help section
 const visibleLeft = ref(false)
@@ -339,11 +346,7 @@ const userResult = ref(null);
 let selected = ref('');     // sql to create selected db
 const syntaxError = ref(false);
 
-const currentTables = ref([]);
-const currentTableNames = ref([]);
-const currentTablesInfo = ref([]);
-// list of all table and column names (used in updateParameterQuery and isParameterQuery)
-const currentTableAndColumnNames = ref([]); 
+const currentDb = ref(new CurrentDB()); // current database object
 
 // Define a reactive variable to store the message from the child component
 const message = ref('No db selected yet');
@@ -395,7 +398,7 @@ const executeDebouncedQuery = debounce(() => {
 
   try {
     const result = db.exec(query);
-    console.log(query)
+    console.log(query);
     userResult.value = result;
     lastValidResult.value = result;
     syntaxError.value = false;
@@ -482,29 +485,11 @@ const resetState = () => {
  */
 const loadInitialTables = () => {
   const db = getDatabase();
-  if (db) {
-    // const result = db.exec('SELECT * FROM employees;');
-    const tables = db.exec("SELECT name FROM sqlite_master WHERE type='table';");
-    currentTableNames.value = tables[0].values;
 
-    currentTables.value = []
-    currentTablesInfo.value = []
-    currentTableAndColumnNames.value = [] // array of all field names
-    for (let tableNameArr of currentTableNames.value) {
-      const tableName = tableNameArr[0];
-      const result = db.exec(`SELECT * FROM ${tableName};`);
-      currentTables.value.push({label:tableName, value:result});
-      currentTableAndColumnNames.value.push(tableName);
-      // push all field names as single elements (... = spread operator)
-      currentTableAndColumnNames.value.push(...result[0].columns);
-      const resultInfo = db.exec(`PRAGMA table_info(${tableName})`);
-      currentTablesInfo.value.push({label:tableName, value:resultInfo[0].values});
-    }
+  if (db) {
+    currentDb.value = new CurrentDB(db); // reload current db
   }
-  // convert all names to lowercase
-  currentTableAndColumnNames.value = currentTableAndColumnNames.value.map(
-    x => x.toLowerCase()
-  );
+
   // reevaluate query if db has changed
   onQueryChange();
 };
@@ -566,7 +551,7 @@ const isParameterQuery = (sqlExpression) => {
   let counter = 0;
   const updatedQuery = sqlExpression.replace(regex, (match, paramName) => {
     // known table and column names are excluded from count
-    if (currentTableAndColumnNames.value.includes(paramName.toLowerCase())) {
+    if (currentDb.value.allTableAndColumnNames.has(paramName.toLowerCase())) {
       return match; // ignore column and table names
     }
     counter++;
@@ -595,7 +580,7 @@ const updateParameterQuery = (sqlExpression) => {
   // Replace each match with a popup prompt
   const updatedQuery = sqlExpression.replace(regex, (match, paramName) => {
     // known table and column names are excluded from replacement
-    if (currentTableAndColumnNames.value.includes(paramName.toLowerCase())) {
+    if (currentDb.value.allTableAndColumnNames.has(paramName.toLowerCase())) {
       return match; // Leave column and table names unchanged
     }
 

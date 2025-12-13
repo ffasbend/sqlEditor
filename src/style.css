@@ -501,11 +501,20 @@ table tr td,table tr th {
     font-weight: 500
 }
 
-.table-info__content li div.primary-key {
-    padding-left: 16px;
-    position: relative;
+.table-info__content li .primary-key,
+.available-tables .primary-key {
     font-weight: bold;
     text-decoration: underline;
+}
+
+.table-info__content li .foreign-key, 
+.available-tables .foreign-key {
+    color: red;
+    font-style: italic;
+}
+
+.p-tooltip {
+    font-size: 12px;
 }
 
 .table-info__content li div:before {

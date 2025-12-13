@@ -1,24 +1,17 @@
 <!-- src/components/TableDisplay.vue -->
 <template>
-  <div v-if="result">
-    <div>
+  <div v-if="result && result.length">
+    <div v-for="(res, index) in result" :key="index">
       <table class="output-table__table">
         <thead>
           <tr>
-            <th v-for="(col, colIndex) in result.columns" :key="colIndex">
-              <span
-                :class="{ 'primary-key': col.isPrimaryKey(), 
-                          'foreign-key': col.isForeignKey() }"
-                v-tooltip.top="col.isForeignKey() ? 
-                  col.fk.referencedTable + ' > ' + col.fk.referencedColumn :  null"
-              >
-                {{ col.name }}
-              </span>
+            <th v-for="(col, colIndex) in res.columns" :key="colIndex">
+                {{ col }}
             </th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(row, rowIndex) in result.values" :key="rowIndex">
+          <tr v-for="(row, rowIndex) in res.values" :key="rowIndex">
             <td v-for="(cell, cellIndex) in row" :key="cellIndex">
               {{ cell }}
             </td>

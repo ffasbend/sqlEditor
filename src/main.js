@@ -2,8 +2,10 @@
 
 import { createApp } from 'vue';
 import PrimeVue from 'primevue/config';
+import Tooltip from 'primevue/tooltip';
 //import Lara from '@primevue/themes/lara';
-import Aura from '@primevue/themes/aura';
+//import Aura from '@primevue/themes/aura';
+import Aura from '@primeuix/themes/aura';
 import './style.css';
 import App from './App.vue';
 
@@ -24,4 +26,5 @@ app.use(PrimeVue, {
     }
 });
 
+app.directive('tooltip', Tooltip);
 app.mount('#app')

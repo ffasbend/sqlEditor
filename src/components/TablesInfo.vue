@@ -4,8 +4,8 @@
     <div v-for="(table, index) in tables" 
       v-bind:class="(index != Object.keys(tables).length - 1) ? 'table-info' : 'last-table-info'">
       <TableInfo 
-        :label=table.label 
-        :result="table.value" 
+        :label="table.tableName"
+        :result="table.columns" 
       />
     </div>
   </div>
