@@ -129,12 +129,36 @@ export const convertAccessWildcardsToSQL = (sqlExpression) => {
 
   // Replace Access wildcards with SQL wildcards only within LIKE clauses
   const sqlQuery = sqlExpression.replace(regex, (match, p1, p2, p3) => {
-      // Replace * with % and ? with _ only inside the LIKE clause's apostrophes
-      const converted = p2
-          .replace(/\*/g, '%')  // Replace * with %
-          .replace(/\?/g, '_'); // Replace ? with _
-      return `${p1}${converted}${p3}`;
+    // Replace * with % and ? with _ only inside the LIKE clause's apostrophes
+    const converted = p2
+      .replace(/\*/g, "%") // Replace * with %
+      .replace(/\?/g, "_"); // Replace ? with _
+    return `${p1}${converted}${p3}`;
   });
 
   return sqlQuery;
-}
+};
+
+/**
+ * Converts commas to dots in decimal numbers within a SQL query string,
+ * while leaving commas inside string literals untouched.
+ *
+ * Example:
+ *   "price = 12,34 AND category = 'A,B'" → "price = 12.34 AND category = 'A,B'"
+ *
+ * @param sql - The SQL query string to process
+ * @returns The SQL query string with decimal commas replaced by dots
+ *
+ * @remarks
+ * The function uses a regex to:
+ *   - Match commas that appear between digits: (\d),(\d)
+ *   - Ensure the comma is **not inside quotes** using a lookahead:
+ *       (?=(?:[^'"]*['"][^'"]*['"])*[^'"]*$)
+ *     - [^'"]*  → any characters except quotes
+ *     - ['"]    → a single or double quote
+ *   - Replace matched commas with a dot: $1.$2
+ */
+export const convertDecimalCommaToDot = (sql) => {
+  // Replace commas between digits but **not inside quotes**
+  return sql.replace(/(\d),(\d)(?=(?:[^'"]*['"][^'"]*['"])*[^'"]*$)/g, "$1.$2");
+};
