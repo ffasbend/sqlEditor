@@ -674,7 +674,6 @@ CREATE TABLE Employé (
 	EntréeService datetime		                -- Date d'entrée en service
 );
 
-INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (14, 'Reinert', 'Charles', 'ALL', 43, 'M', 'Marketing', '1997-03-21');
 INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (1, 'Wengler', 'Guy', 'LUX', 24, 'M', 'Comptabiltité', '2020-09-21');
 INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (2, 'Jurcevic', 'Alain', 'LUX', 28, 'M', 'Comptabiltité', '2016-09-02');
 INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (3, 'Ribeiro', 'Jean-Marie', 'PRT', 23, 'M', 'Facturation', '2020-06-26');
@@ -688,6 +687,7 @@ INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, E
 INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (11, 'Cloos', 'Edmond', 'LUX', 23, 'M', 'Achat', '2020-08-29');
 INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (12, 'Silva Machado', 'Eugène', 'PRT', 29, 'M', 'Direction', '2014-01-15');
 INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (13, 'Ipavec', 'Elsa', 'ESP', 55, 'F', 'Vente', '1991-06-24');
+INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (14, 'Reinert', 'Charles', 'ALL', 43, 'M', 'Marketing', '1997-03-21');
 INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (15, 'Weber', 'Jos', 'LUX', 32, 'M', 'Vente', '2018-03-06');
 INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (16, 'Tempels', 'Manuel', 'ALL', 26, 'M', null, '2016-10-19');
 INSERT INTO Employé (Numéro, Nom, Prénom, Nationalité, Age, Sexe, Service, EntréeService) VALUES (17, 'Muller', 'Henri', 'LUX', 43, 'M', 'Informatique', '2012-09-14');
