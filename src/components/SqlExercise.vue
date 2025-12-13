@@ -89,6 +89,9 @@
         Decimal numbers support both dot (<code>.</code>) and comma (<code>,</code>)
         as decimal separators.
       </li>
+      <li>
+        To manually enable or disable live updates, click the status indicator (🟢).
+      </li>      
     </ul> 
 
     <h2>Support for MS Access</h2>
@@ -180,7 +183,18 @@
           <div class="input-tab">
             <h2>Input</h2>
           </div>
+
           <div class="editor-btn__wrapper header-bar">
+            
+            <!-- live indicator -->
+            <div class="live-indicator-wrapper">
+              <LiveIndicator 
+                :isAutoDisabled="areLiveUpdatesAutoDisabled"
+                :isUserDisabled="areLiveUpdatesDisabledByUser"
+                @click="toggleManuallyEnabledLiveUpdates"
+              />
+            </div>
+
             <!-- Editor icons -->
             <ul class="editor-btn-list">
               <li class="editor-btn-list__item">
@@ -244,10 +258,12 @@
             </ul>
             <button 
               @click="runQuery"
-              :disabled="syntaxError"
+              :disabled="
+                !areLiveUpdatesDisabledByUser 
+                && (syntaxError || !areLiveUpdatesAutoDisabled)"
               class="cta-btn" style=""
             >
-              Run SQL
+              Run SQL 
             </button>
             <a @click="toggleAvailableTables()"
               id="shrink-btn-right"
@@ -274,6 +290,14 @@
             </a>
           </div>
         </div>
+
+        <!-- Info Message -->
+        <div class="info-message"
+          :class="{ 'info-message-hidden': !message }"
+        >
+            {{ message }}
+        </div>
+        
         <!-- Editor -->
         <div class="sql-editor-input__area">
           <SqlEditor
@@ -353,6 +377,7 @@ import TableDisplay from './TableDisplay.vue';
 import TablesDisplay from './TablesDisplay.vue';
 import TablesInfo from './TablesInfo.vue';
 import ResultDisplay from './ResultDisplay.vue';
+import LiveIndicator from './LiveIndicator.vue';
 import SqlEditor from './SqlEditor.vue';
 import debounce from '../utils/debounce';
 import dbs from '../utils/dbs';
@@ -365,44 +390,70 @@ import Tab from 'primevue/tab';
 import TabPanels from 'primevue/tabpanels';
 import TabPanel from 'primevue/tabpanel';
 
-
-
+// Classes
 import { CurrentDB } from "../classes/CurrentDB";
-
-
 
 // Reactive variables to show the left side panel or the help section
 const visibleLeft = ref(false)
 const visibleHelp = ref(false)
 
-
-// State variables
+// Reactive State variables
 const sqlContent = ref('-- Write your SQL query here\nSELECT;');
 const feedback = ref('');
 const feedbackClass = ref('');
 const userResult = ref(null);
 let selected = ref('');     // sql to create selected db
+const isDbSelected = ref(false); // has user selected a database?
 const syntaxError = ref(false);
+// Define a reactive variable to store the message from the child component
+const message = ref('No Database selected');
+
+// Whether live updates are auto-disabled due to parametrized or Non-SELECT queries
+const areLiveUpdatesAutoDisabled = ref(false);
+
+// Whether live updates are manually disabled by user
+const areLiveUpdatesDisabledByUser = ref(false);
 
 const currentDb = ref(new CurrentDB()); // current database object
 
-// Define a reactive variable to store the message from the child component
-const message = ref('No db selected yet');
+// Store the last valid result
+const lastValidResult = ref(null);
+
 
 // Define a method to handle the emitted event
 const handleValueChange = async (sql) => {
   await initDatabase(sql);
-  loadInitialTables()
+  isDbSelected.value = true;
+  loadInitialTables();
+  feedback.value = '';
 };
 
-// Store the last valid result
-const lastValidResult = ref(null);
+const toggleManuallyEnabledLiveUpdates = () => {
+  areLiveUpdatesDisabledByUser.value = !areLiveUpdatesDisabledByUser.value;
+  if (!areLiveUpdatesDisabledByUser.value) {
+    // re-execute the last valid query
+    executeDebouncedQuery();
+  } else {
+    message.value = 'Live updates manually disabled by user. Click "Run SQL".';
+  }
+  console.log('Toggle live updates requested: ' + areLiveUpdatesDisabledByUser.value);
+};
+
+
+const onQueryChange = () => {
+  feedback.value = '';
+  feedbackClass.value = '';
+  console.log('Query changed, executing debounced query...');
+  executeDebouncedQuery();
+};
+
 
 /**
  * Debounced function to execute the query as the user types.
  */
 const executeDebouncedQuery = debounce(() => {
   const db = getDatabase();
+
   if (!db) {
     feedback.value = 'Database not initialized.';
     feedbackClass.value = 'alert alert-danger';
@@ -412,6 +463,39 @@ const executeDebouncedQuery = debounce(() => {
   // sanitize query
   // trim spaces and comments (to end of line)
   var query = sqlContent.value.trim().replace(/--.*\n/gm, '');  
+
+  // only execute SELECT queries on the fly
+  // parameter queries can't be executed on the fly
+  if (query === '' 
+      || !query.toLowerCase().startsWith('select')
+      || isParameterQuery(query) // check for MS Access parameter query ([..])
+    ) {
+    areLiveUpdatesAutoDisabled.value = true;
+    userResult.value = null;
+    syntaxError.value = false;
+
+    if (areLiveUpdatesDisabledByUser.value) {
+      message.value = 'Live updates manually disabled by user. Click "Run SQL".';
+    } else if (isParameterQuery(query)) {
+      message.value = 'Live updates do not support parameter queries. Click "Run SQL".';
+    } else {
+      message.value = 'Live updates only support SELECT queries. Click "Run SQL".';
+    }
+    return;
+  }
+
+  // Before stopping (if live updates are disabled by user),
+  // reset auto-enabled live updates and message
+  areLiveUpdatesAutoDisabled.value = false;
+  message.value = '';
+  if (areLiveUpdatesDisabledByUser.value) {
+    message.value = 'Live updates manually disabled by user. Click "Run SQL".';
+    return;
+  } else if (!isDbSelected.value) {
+    message.value = 'No Database selected';
+  }
+
+
   // Replace MS Access date literals with SQL date format
   query = replaceMSAccessDateLiterals(query);
   // Replace MS Access wildcards with SQL wildcards
@@ -420,21 +504,6 @@ const executeDebouncedQuery = debounce(() => {
   query = convertMSAccessDateFunctions(query);
 
   query = convertDecimalCommaToDot(query);
-
-  // only execute SELECT queries on the fly
-  // parameter queries can't be executed on the fly
-  if (query === '' 
-      || !query.toLowerCase().startsWith('select')
-      || isParameterQuery(query) // check for MS Access parameter query ([..])
-    ) {
-    userResult.value = null;
-    syntaxError.value = false;
-    feedback.value = '';
-    if (isParameterQuery(query)) {
-      feedback.value = 'Parameter query detected, on the fly execution not supported, please click the Run SQL button to execute the query.';
-    }
-    return;
-  }
 
   try {
     const result = db.exec(query);
@@ -450,12 +519,6 @@ const executeDebouncedQuery = debounce(() => {
     // console.error('SQL Syntax Error:', error);
   }
 }, 500);
-
-const onQueryChange = () => {
-  feedback.value = '';
-  feedbackClass.value = '';
-  executeDebouncedQuery();
-};
 
 /**
  * Function to run the SQL query when button is pressed.
@@ -503,6 +566,8 @@ const runQuery = () => {
     if (query !== '' && !query.toLowerCase().startsWith('select')) {
       // show number of affected rows
       feedback.value = db.getRowsModified() + " row(s) affected";
+          feedbackClass.value = 'alert alert-danger';
+      console.log( db.getRowsModified());
       loadInitialTables(); // reload tables if no select
     } else {
       feedback.value = '';
@@ -530,10 +595,11 @@ const loadInitialTables = () => {
 
   if (db) {
     currentDb.value = new CurrentDB(db); // reload current db
+    //message.value = '';
   }
 
   // reevaluate query if db has changed
-  onQueryChange();
+  executeDebouncedQuery();
 };
 
 /**

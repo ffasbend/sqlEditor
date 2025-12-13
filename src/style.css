@@ -21,6 +21,10 @@
     width: 100%;
     padding-bottom: 2px;
 }
+
+/* 
+ * Help section 
+ */
 .help-section h2 {
     padding-top: 1rem;
 }
@@ -43,6 +47,37 @@
     overflow-y: auto; /* add vertical scrollbars */
     max-height: 80vh; /* 80% of viewport height */
 }
+
+.info-message {
+    background-color: #fbe5dd;
+    border-left: 6px solid #e04d0d;
+    padding: 3px 15px;
+}
+
+.info-message-hidden {
+    display: none;
+}
+
+/* 
+ * Live Indicator Styles 
+ */
+.live-indicator-wrapper {
+  margin-right: auto;
+  margin-left: 10px;
+  border: none; 
+}
+
+.live-indicator-content{
+  padding: 1px 5px;
+  margin-left: 5px;
+  font-size: 14px;
+}
+
+.live-indicator-symbol {
+  font-size: 16px;
+  vertical-align: middle;
+}
+
 
 :root {
     --max-column-breakpoint: 500px;
