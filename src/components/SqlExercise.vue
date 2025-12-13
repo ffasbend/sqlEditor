@@ -317,7 +317,7 @@
 
 <script setup>
 import { ref, onMounted, computed } from 'vue';
-import { initDatabase, getDatabase, replaceMSAccessDateLiterals, convertAccessWildcardsToSQL, convertMSAccessDateFunctions }
+import { initDatabase, getDatabase, replaceMSAccessDateLiterals, convertAccessWildcardsToSQL, convertMSAccessDateFunctions, convertDecimalCommaToDot }
   from '../utils/database';
 import VueSelect from "vue3-select-component";
 import TableDisplay from './TableDisplay.vue';
@@ -390,6 +390,8 @@ const executeDebouncedQuery = debounce(() => {
   // convert MS Access date functions to SQLite functions
   query = convertMSAccessDateFunctions(query);
 
+  query = convertDecimalCommaToDot(query);
+
   // only execute SELECT queries on the fly
   // parameter queries can't be executed on the fly
   if (query === '' 
@@ -459,6 +461,8 @@ const runQuery = () => {
   query = convertAccessWildcardsToSQL(query);
   // convert MS Access date functions to SQLite functions
   query = convertMSAccessDateFunctions(query);
+
+  query = convertDecimalCommaToDot(query);
 
   try {
     const result = db.exec(query);
@@ -595,14 +599,26 @@ const updateParameterQuery = (sqlExpression) => {
 
     // Prompt the user for input
     const userInput = prompt(`Enter value for ${paramName}:`);
-    // regex to check for MS Access date literal
-    const re = /^#(0?[1-9]|1[0-2])\/(0?[1-9]|[12]\d|3[01])\/\d{2}(\d{2})?#$/;
+    
+    // Regex to check for MS Access date literal: #MM/DD/YYYY#
+    const reDate = /^#(0?[1-9]|1[0-2])\/(0?[1-9]|[12]\d|3[01])\/\d{2}(\d{2})?#$/;
+
+    // Regex to check for numbers:
+    // - integer: 123
+    // - decimal with dot: 12.34
+    // - decimal with comma: 12,34
+    // - optional negative sign
+    const reNumber = /^-?\d+([.,]\d+)?$/;
+
     if (userInput === null) {
       console.log('null')
       return match; // If user cancels, leave the original text unchanged
-    } else if (re.test(userInput.trim())) {
+    } else if (reDate.test(userInput.trim())) { // test for MS Access date literal
       console.log('date', userInput)
-      return userInput.trim(); // If input is empty, replace with NULL
+      return userInput.trim(); // Valid MS Access date literal, If input is empty, replace with NULL
+    } else if (reNumber.test(userInput.trim())) {
+      console.log('number', userInput);
+      return userInput.trim(); // Numeric value, leave as-is (no quotes)
     } else {
       return `'${userInput}'`; // Wrap the input in single quotes for SQL compatibility
     }
