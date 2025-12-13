@@ -23,7 +23,7 @@ export class CurrentDB {
   constructor(db: any = null) {
     this.db = db;
     this.tables = []; // array of Table objects
-    this.allTableAndColumnNames = new Set(); // create emoty Set    
+    this.allTableAndColumnNames = new Set(); // create empty Set
     this.loadCurrentDatabase();
   }
 
@@ -35,6 +35,15 @@ export class CurrentDB {
     this.tables.push(table);
   }
 
+  /**
+   * Checks if a given name corresponds to a table or column in the current database.
+   *
+   * The check is case-insensitive and uses the internal `allTableAndColumnNames` set
+   * which contains all table names and column names (in lowercase) loaded from the database.
+   *
+   * @param name - The name to check (table name or column name)
+   * @returns `true` if the name exists as a table or column, `false` otherwise
+   */
   isValidTableOrColumn(name: string): boolean {
     return this.allTableAndColumnNames.has(name.toLowerCase());
   }
@@ -45,7 +54,6 @@ export class CurrentDB {
    */
   loadCurrentDatabase() {
     if (this.db) {
-
       // Get list of all tables
       const resultTables = this.db.exec(
         "SELECT name FROM sqlite_master WHERE type='table';"
