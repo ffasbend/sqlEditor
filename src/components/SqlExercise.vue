@@ -77,26 +77,55 @@
   </a>
     <h2>General Info</h2>
     <ul>
-      <li> SELECT queries (except parameter queries) are executed on the fly (live updates, including error messages).</li>
-      <li> INSERT, UPDATE and DELETE queries must be executed with the button <strong>RUN SQL</strong>.</li>
-      <li> For decimal numbers, you can use a dot (".") or a comma (",").</li>
+      <li>
+        <strong>SELECT</strong> queries (except parameterized queries) are executed
+        automatically with live updates, including error messages.
+      </li>
+      <li>
+        <strong>INSERT</strong>, <strong>UPDATE</strong>, and <strong>DELETE</strong>
+        queries must be executed using the <strong>RUN SQL</strong> button.
+      </li>
+      <li>
+        Decimal numbers support both dot (<code>.</code>) and comma (<code>,</code>)
+        as decimal separators.
+      </li>
+    </ul> 
 
-    </ul>
     <h2>Support for MS Access</h2>
     <ul>
-      <li> MS Access wildcards (* and ?) in pattern-matching queries (LIKE queries) are supported.</li>
-      <li> MS Access date literals (#mm/dd/yyyy#) are supported (and converted to SQL date format internally). <br />
-      A year can be entered as 2 or 4 digits (e.g., #12/31/99# or #12/31/1999#). <br />
-          (2-digit year < 50 will be interpreted as 20.., 2-digit year >= 50 as 19..)
+      <li>
+        MS Access wildcards (<code>*</code> and <code>?</code>) are supported in
+        pattern-matching (<strong>LIKE</strong>) queries.
       </li>
-      <li> MS Access date functions YEAR(), MONTH(), DAY() are supported.</li>
-      <li> MS Access parameter queries ([...]) are supported (values can be entered in popup window).</li>
+      <li>
+        MS Access date literals (<code>#mm/dd/yyyy#</code>) are supported and
+        automatically converted to the SQL date format.<br />
+        The year may be entered with 2 or 4 digits
+        (e.g. <code>#12/31/99#</code> or <code>#12/31/1999#</code>).<br />
+        Two-digit years &lt; 50 are interpreted as 20xx, and years ≥ 50 as 19xx.
+      </li>
+      <li>
+        MS Access date functions <code>YEAR()</code>, <code>MONTH()</code>, and
+        <code>DAY()</code> are supported.
+      </li>
+      <li>
+        MS Access parameter queries (<code>[...]</code>) are supported; parameter
+        values are entered via a popup dialog.
+      </li>
     </ul>
+
     <h2>Small screen support</h2>
     <ul>
-      <li> <strong>Menu button</strong> (top left): show info about all tables with data types.</li>
-      <li> <strong>Output</strong> tab: show output from the current query.</li>
-      <li> <strong>Available Tables</strong> tab: show all tables and records.</li>
+      <li>
+        <strong>Menu button</strong> (top left): view information about all tables,
+        including column data types.
+      </li>
+      <li>
+        <strong>Output</strong> tab: displays the results of the current query.
+      </li>
+      <li>
+        <strong>Available Tables</strong> tab: lists all tables and their records.
+      </li>
     </ul>
   </Drawer>
 
