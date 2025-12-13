@@ -68,10 +68,19 @@
   
   <!-- Help -->
   <Drawer v-model:visible="visibleHelp" header="Online SQL Editor Help (v1.0.5)" position="top" style="height: auto" class="help-section">
+  <a 
+    href="https://github.com/ffasbend/sqlEditor"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    View GitHub Repository
+  </a>
     <h2>General Info</h2>
     <ul>
       <li> SELECT queries (except parameter queries) are executed on the fly (live updates, including error messages).</li>
       <li> INSERT, UPDATE and DELETE queries must be executed with the button <strong>RUN SQL</strong>.</li>
+      <li> For decimal numbers, you can use a dot (".") or a comma (",").</li>
+
     </ul>
     <h2>Support for MS Access</h2>
     <ul>
