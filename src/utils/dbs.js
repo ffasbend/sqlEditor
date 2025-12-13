@@ -566,7 +566,8 @@ CREATE TABLE AuteurLivre (
 	NumAuteur int NOT NULL,   -- Numéro de l'auteur (clé étrangère)
 	NumLivre int NOT NULL,    -- Numéro du livre (clé étrangère)
 	PRIMARY KEY (NumAuteur, NumLivre),
-  CONSTRAINT AuteurAuteurLivre FOREIGN KEY (NumAuteur) REFERENCES Auteur (NumAuteur)
+  CONSTRAINT AuteurAuteurLivre FOREIGN KEY (NumAuteur) REFERENCES Auteur (NumAuteur),
+  CONSTRAINT LivreAuteurLivre FOREIGN KEY (NumLivre) REFERENCES Livre (NumLivre)
 );
 
 INSERT INTO AuteurLivre (NumAuteur, NumLivre) VALUES (1, 2);
