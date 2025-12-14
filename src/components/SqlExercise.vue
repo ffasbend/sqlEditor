@@ -257,7 +257,7 @@
               </li> -->
             </ul>
             <button 
-              @click="runQuery"
+              @click="() => runQuery(false)"
               :disabled="
                 !areLiveUpdatesDisabledByUser 
                 && (syntaxError || !areLiveUpdatesAutoDisabled)"
@@ -398,7 +398,7 @@ const visibleLeft = ref(false)
 const visibleHelp = ref(false)
 
 // Reactive State variables
-const sqlContent = ref('-- Write your SQL query here\nSELECT;');
+const sqlContent = ref('-- Write your SQL query here\nSELECT ;');
 const feedback = ref('');
 const feedbackClass = ref('');
 const userResult = ref(null);
@@ -436,74 +436,95 @@ const toggleManuallyEnabledLiveUpdates = () => {
   } else {
     message.value = 'Live updates manually disabled by user. Click "Run SQL".';
   }
-  console.log('Toggle live updates requested: ' + areLiveUpdatesDisabledByUser.value);
+  // console.log('Toggle live updates requested: ' + areLiveUpdatesDisabledByUser.value);
 };
 
 
 const onQueryChange = () => {
   feedback.value = '';
   feedbackClass.value = '';
-  console.log('Query changed, executing debounced query...');
+  // console.log('Query changed, executing debounced query...');
   executeDebouncedQuery();
 };
+
+
+
 
 
 /**
  * Debounced function to execute the query as the user types.
  */
 const executeDebouncedQuery = debounce(() => {
-  const db = getDatabase();
+  runQuery(true); // live updates
+}, 500);
 
+/**
+ * Executes the current SQL query safely.
+ * - Handles database not initialized.
+ * - Checks if live updates are allowed for SELECT queries.
+ * - Catches and reports errors.
+ *
+ * @param {boolean} liveEnabled Whether this execution is triggered by live updates
+ */
+const runQuery = (liveEnabled = false) => {
+
+  // Check for valid database connection
+  const db = getDatabase();
   if (!db) {
     feedback.value = 'Database not initialized.';
     feedbackClass.value = 'alert alert-danger';
     return;
   }
 
-  // sanitize query
-  // trim spaces and comments (to end of line)
-  var query = sqlContent.value.trim().replace(/--.*\n/gm, '');  
+  // Get query from editor
+  var query = getSanitizedQuery();
 
-  // only execute SELECT queries on the fly
-  // parameter queries can't be executed on the fly
-  if (query === '' 
-      || !query.toLowerCase().startsWith('select')
-      || isParameterQuery(query) // check for MS Access parameter query ([..])
-    ) {
-    areLiveUpdatesAutoDisabled.value = true;
-    userResult.value = null;
-    syntaxError.value = false;
+  if (!liveEnabled && !query) {
+    feedback.value = 'Query is empty.';
+    feedbackClass.value = 'alert alert-warning';
+    return;
+  }
 
+  // Live updates only support SELECT queries without parameters
+  if (liveEnabled) {
+    // console.log(query)
+    // check if query can be live executed (SELECT query without parameters)
+    if (blocksLiveExecution(query)) {
+      areLiveUpdatesAutoDisabled.value = true;
+      userResult.value = null;
+      syntaxError.value = false;
+
+      if (areLiveUpdatesDisabledByUser.value) {
+        message.value = 'Live updates manually disabled by user. Click "Run SQL".';
+      } else if (isParameterQuery(query)) {
+        message.value = 'Live updates do not support parameter queries. Click "Run SQL".';
+      } else {
+        message.value = 'Live updates only support SELECT queries. Click "Run SQL".';
+      }
+      return;
+    }
+
+    // Before stopping (if live updates are disabled by user),
+    // reset auto-enabled live updates and message
+    areLiveUpdatesAutoDisabled.value = false;
+    message.value = '';
     if (areLiveUpdatesDisabledByUser.value) {
       message.value = 'Live updates manually disabled by user. Click "Run SQL".';
-    } else if (isParameterQuery(query)) {
-      message.value = 'Live updates do not support parameter queries. Click "Run SQL".';
-    } else {
-      message.value = 'Live updates only support SELECT queries. Click "Run SQL".';
+      return;
+    } else if (!isDbSelected.value) {
+      message.value = 'No Database selected';
     }
-    return;
+  } else {
+    // Not live execution
+    // check for MS Access parameter query ([..])
+    if (isParameterQuery(query)) {
+      // ask for parameter values
+      query = updateParameterQuery(query);
+    }
   }
 
-  // Before stopping (if live updates are disabled by user),
-  // reset auto-enabled live updates and message
-  areLiveUpdatesAutoDisabled.value = false;
-  message.value = '';
-  if (areLiveUpdatesDisabledByUser.value) {
-    message.value = 'Live updates manually disabled by user. Click "Run SQL".';
-    return;
-  } else if (!isDbSelected.value) {
-    message.value = 'No Database selected';
-  }
-
-
-  // Replace MS Access date literals with SQL date format
-  query = replaceMSAccessDateLiterals(query);
-  // Replace MS Access wildcards with SQL wildcards
-  query = convertAccessWildcardsToSQL(query);
-  // convert MS Access date functions to SQLite functions
-  query = convertMSAccessDateFunctions(query);
-
-  query = convertDecimalCommaToDot(query);
+  // Convert query from MS Access format to SQL/SQLite-ready format
+  query = normalizeQuery(query);
 
   try {
     const result = db.exec(query);
@@ -511,63 +532,11 @@ const executeDebouncedQuery = debounce(() => {
     userResult.value = result;
     lastValidResult.value = result;
     syntaxError.value = false;
-    feedback.value = '';
-  } catch (error) {
-    syntaxError.value = true;
-    feedback.value = error.message;
-    userResult.value = null;
-    // console.error('SQL Syntax Error:', error);
-  }
-}, 500);
-
-/**
- * Function to run the SQL query when button is pressed.
- */
-const runQuery = () => {
-  const db = getDatabase();
-  if (!db) {
-    feedback.value = 'Database not initialized.';
-    feedbackClass.value = 'alert alert-danger';
-    return;
-  }
-
-  if (syntaxError.value) {
-    feedback.value = '❌ Cannot run query due to syntax errors.';
-    feedbackClass.value = 'alert alert-danger';
-    return;
-  }
-
-  // sanitize query
-  // trim spaces and comments (to end of line)
-  var query = sqlContent.value.trim().replace(/--.*\n/gm, '');
-  
-  // check for MS Access parameter query ([..])
-  if (isParameterQuery(query)) {
-    // ask for parameter values
-    query = updateParameterQuery(query);
-  }
-
-  // Replace MS Access date literals with SQL date format
-  query = replaceMSAccessDateLiterals(query);
-  // Replace MS Access wildcards with SQL wildcards
-  query = convertAccessWildcardsToSQL(query);
-  // convert MS Access date functions to SQLite functions
-  query = convertMSAccessDateFunctions(query);
-
-  query = convertDecimalCommaToDot(query);
-
-  try {
-    const result = db.exec(query);
-    console.log(query)
-    userResult.value = result;
-    lastValidResult.value = result;
-    syntaxError.value = false;
     // check if SELECT query
-    if (query !== '' && !query.toLowerCase().startsWith('select')) {
+    if (!query.toLowerCase().startsWith('select')) {
       // show number of affected rows
       feedback.value = db.getRowsModified() + " row(s) affected";
-          feedbackClass.value = 'alert alert-danger';
-      console.log( db.getRowsModified());
+      feedbackClass.value = 'alert alert-danger';
       loadInitialTables(); // reload tables if no select
     } else {
       feedback.value = '';
@@ -577,6 +546,66 @@ const runQuery = () => {
     feedback.value = error.message;
     userResult.value = null;
   }
+}
+
+/**
+ * Retrieves and sanitizes the current SQL query from the editor.
+ * - Trims leading/trailing spaces.
+ * - Removes single-line comments starting with `--`.
+ *
+ * @returns Sanitized SQL query an empty string if no query is present.
+ */
+const getSanitizedQuery = () => {
+  // sanitize query
+  // trim spaces and comments (to end of line)
+  //   --.* → matches -- followed by any characters on that line
+  //   (\n|$) → matches either a newline or the end of the string
+  //   gm → global + multiline mode (^ and $ match start/end of each line)
+  // Effect:
+  // - Removes any comment from -- to the end of the line, even if there’s no
+  //   newline at the end.
+  // - Works for the last line of the file too.
+  return sqlContent.value.replace(/--.*(\n|$)/gm, '').trim();
+};
+
+/**
+ * Normalizes a SQL query for execution.
+ * Convert query from MS Access format to SQL/SQLite-ready format
+ * 
+ * - Replaces MS Access date literals (#mm/dd/yyyy#) with standard SQL date format ('yyyy-mm-dd').
+ * - Converts MS Access wildcards (*, ?) to SQL wildcards (% and _).
+ * - Converts MS Access date functions (YEAR, MONTH, DAY) to SQLite equivalents.
+ * - Converts decimal numbers with commas to dots.
+ *
+ * @param {string} query - The raw SQL query from the editor.
+ * @returns {string} The normalized SQL query ready for execution.
+ */
+const normalizeQuery = (query) => {
+
+  // Replace MS Access date literals
+  query = replaceMSAccessDateLiterals(query);
+
+  // Convert MS Access wildcards (* → %, ? → _)
+  query = convertAccessWildcardsToSQL(query);
+
+  // Convert MS Access date functions to SQLite functions
+  query = convertMSAccessDateFunctions(query);
+
+  // Convert decimal commas to dots
+  query = convertDecimalCommaToDot(query);
+
+  return query;
+}
+
+/**
+ * Checks if a SQL query is a mutating query (INSERT, UPDATE, DELETE, ...)
+ *
+ * @param {string} query - The SQL query string
+ * @returns {boolean} True if query is INSERT, UPDATE, DELETE, ...
+ */
+const blocksLiveExecution = (query) => {
+  // Check if query starts with INSERT, UPDATE, or DELETE
+  return /^\s*(INSERT|UPDATE|DELETE|CREATE|DROP|ALTER|REPLACE|PRAGMA|VACUUM|ATTACH|DETACH|BEGIN|COMMIT|ROLLBACK|EXPLAIN)\b/i.test(query) || isParameterQuery(query);
 };
 
 const resetState = () => {
@@ -706,13 +735,13 @@ const updateParameterQuery = (sqlExpression) => {
     const reNumber = /^-?\d+([.,]\d+)?$/;
 
     if (userInput === null) {
-      console.log('null')
+      // console.log('null')
       return match; // If user cancels, leave the original text unchanged
     } else if (reDate.test(userInput.trim())) { // test for MS Access date literal
-      console.log('date', userInput)
+      // console.log('date', userInput)
       return userInput.trim(); // Valid MS Access date literal, If input is empty, replace with NULL
     } else if (reNumber.test(userInput.trim())) {
-      console.log('number', userInput);
+      // console.log('number', userInput);
       return userInput.trim(); // Numeric value, leave as-is (no quotes)
     } else {
       return `'${userInput}'`; // Wrap the input in single quotes for SQL compatibility

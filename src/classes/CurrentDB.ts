@@ -65,7 +65,7 @@ export class CurrentDB {
         // add tableName to allTableAndColumnNames set
         this.allTableAndColumnNames.add(tableName.toLowerCase());
         // Get definition
-        console.log(`Loading table: ${tableName}`);
+        // console.log(`Loading table: ${tableName}`);
         this.loadTable(tableName);
       }
     }
@@ -124,7 +124,7 @@ export class CurrentDB {
     // Load table rows
     const resultData = this.db.exec(`SELECT * FROM ${tableName};`);
     table.addValues(resultData[0].values);
-    console.log(`+ Adding ${resultData[0].values.length} table rows`);
+    // console.log(`+ Adding ${resultData[0].values.length} table rows`);
 
     this.addTable(table);
 
@@ -171,9 +171,7 @@ export class CurrentDB {
         keys.push(fk[3]);
       }
 
-      console.log(
-        `+ Foreign keys found for table ${tableName}: ` + keys.join(", ")
-      );
+      // console.log(`+ Foreign keys found for table ${tableName}: ` + keys.join(", "));
     }
 
     return foreignKeys;

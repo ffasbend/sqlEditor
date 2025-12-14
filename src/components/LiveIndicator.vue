@@ -13,7 +13,7 @@
     </span>
     <span class="live-indicator-content" >
       {{ isUserDisabled ? 
-          'User-disabled updates': 
+          'User-disabled live updates': 
           isAutoDisabled ? 'Auto-disabled live updates' : 'Auto-enabled live updates' }}
     </span>
   </div>
