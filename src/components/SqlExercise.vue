@@ -369,7 +369,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue';
+import { ref, onMounted, watch, computed } from 'vue';
 import { initDatabase, getDatabase, replaceMSAccessDateLiterals, convertAccessWildcardsToSQL, convertMSAccessDateFunctions, convertDecimalCommaToDot }
   from '../utils/database';
 import VueSelect from "vue3-select-component";
@@ -393,12 +393,23 @@ import TabPanel from 'primevue/tabpanel';
 // Classes
 import { CurrentDB } from "../classes/CurrentDB";
 
+/**
+ * Reactive State variables
+ */
 // Reactive variables to show the left side panel or the help section
 const visibleLeft = ref(false)
 const visibleHelp = ref(false)
 
-// Reactive State variables
-const sqlContent = ref('-- Write your SQL query here\nSELECT ;');
+// SQL Editor content
+const sqlContent = ref(localStorage.getItem('sqlQuery') 
+  || '-- Write your SQL query here\nSELECT ;');
+
+// Save automatically on change
+watch(sqlContent, (newVal) => {
+  localStorage.setItem('sqlQuery', newVal);
+});
+
+
 const feedback = ref('');
 const feedbackClass = ref('');
 const userResult = ref(null);
