@@ -82,8 +82,8 @@
         automatically with live updates, including error messages.
       </li>
       <li>
-        <strong>INSERT</strong>, <strong>UPDATE</strong>, and <strong>DELETE</strong>
-        queries must be executed using the <strong>RUN SQL</strong> button.
+        All other queries (e.g. <strong>INSERT</strong>, <strong>UPDATE</strong>, <strong>DELETE</strong>, ...)
+        or parameterized queries must be executed using the <strong>RUN SQL</strong> button.
       </li>
       <li>
         Decimal numbers support both dot (<code>.</code>) and comma (<code>,</code>)
@@ -91,7 +91,10 @@
       </li>
       <li>
         To manually enable or disable live updates, click the status indicator (🟢).
-      </li>      
+      </li>  
+      <li>
+        The latest query is automatically saved and restored across page reloads using localStorage.
+      </li>  
     </ul> 
 
     <h2>Support for MS Access</h2>
