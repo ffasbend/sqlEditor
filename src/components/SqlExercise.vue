@@ -393,6 +393,8 @@ import Tab from 'primevue/tab';
 import TabPanels from 'primevue/tabpanels';
 import TabPanel from 'primevue/tabpanel';
 
+import { logger } from '../utils/logger';
+
 // Classes
 import { CurrentDB } from "../classes/CurrentDB";
 
@@ -450,14 +452,14 @@ const toggleManuallyEnabledLiveUpdates = () => {
   } else {
     message.value = 'Live updates manually disabled by user. Click "Run SQL".';
   }
-  // console.log('Toggle live updates requested: ' + areLiveUpdatesDisabledByUser.value);
+  logger.info('Toggle live updates requested: ' + areLiveUpdatesDisabledByUser.value);
 };
 
 
 const onQueryChange = () => {
   feedback.value = '';
   feedbackClass.value = '';
-  // console.log('Query changed, executing debounced query...');
+  logger.debug('Query changed, executing debounced query...');
   executeDebouncedQuery();
 };
 
@@ -501,9 +503,10 @@ const runQuery = (liveEnabled = false) => {
 
   // Live updates only support SELECT queries without parameters
   if (liveEnabled) {
-    // console.log(query)
     // check if query can be live executed (SELECT query without parameters)
     if (blocksLiveExecution(query)) {
+      // disable live updates
+      logger.debug('Live updates auto-disabled due to non-SELECT or parameter query.', query);
       areLiveUpdatesAutoDisabled.value = true;
       userResult.value = null;
       syntaxError.value = false;
@@ -542,7 +545,7 @@ const runQuery = (liveEnabled = false) => {
 
   try {
     const result = db.exec(query);
-    console.log(query);
+    logger.success(query);
     userResult.value = result;
     lastValidResult.value = result;
     syntaxError.value = false;
@@ -558,6 +561,7 @@ const runQuery = (liveEnabled = false) => {
   } catch (error) {
     syntaxError.value = true;
     feedback.value = error.message;
+    logger.error(query, error);
     userResult.value = null;
   }
 }
