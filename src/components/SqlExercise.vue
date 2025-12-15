@@ -357,7 +357,7 @@
             <div class="output-area">
               <div class="output-area__table">
                 <div v-if="userResult && userResult.length" class="mt-4">
-                  <TableDisplay :result="userResult" />
+                  <ResultDisplay :result="userResult" />
                 </div>
               </div>
               <p class="success-message"></p>
