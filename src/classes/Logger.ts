@@ -32,7 +32,7 @@ export const LOG_LEVEL_META: Record<
 };
 
 const LEVELS: Record<LogLevel, boolean> = {
-  success: true,
+  success: false,
   error: false,
   info: false,
   debug: false,
