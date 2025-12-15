@@ -2,6 +2,34 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v1.0.6] - 2025-12-15
+
+### Added
+
+- Added new classes to represent current db: currentDB, Table, TableColumn, ForeignKey
+- Modify code to use new classes
+- Add separate view to display SQL results
+- Display primary keys in bold and underlined
+- Display foreign keys in red and italic
+- Add tooltip with destination table and column to foreign keys
+- Add scrollbars to the help section (PrimeVue component: Drawer)
+- Reorder rows in Employé table (move record 14 to correct position)
+- Add support for decimals with dot (".") or comma (",") as separator
+- Add link to github repository in help section.
+- Display number of affected rows for UPDATE, INSERT and DELETE queries.
+- Add status message and status indicator for live updates
+- Add possibility to manually disable live updates.
+- Save and restore SQL editor content across page reloads using localStorage
+- Add logger class and replace console.log calls with logger
+- Add vue component 'SettingsDrawer' to configure log levels
+
+### Fixed
+
+- Unused css file 'sql_editor.css' removed from 'index.html'
+- Make db and queries case-insensitive
+- Remove preceding newlines from query to ensure live updates work
+- Refactor runQuery and executeDebouncedQuery functions
+
 ## [v1.0.5] - 2025-12-09
 
 ### Added
@@ -24,7 +52,6 @@ All notable changes to this project will be documented in this file.
   (https://www.npmjs.com/package/vite-plugin-monaco-editor-esm)
 - npm uninstall vite-plugin-monaco-editor
 - npm install --save-dev vite-plugin-monaco-editor-esm
-
 
 ## [v1.0.3] - 2025-04-01
 
