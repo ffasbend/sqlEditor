@@ -180,7 +180,7 @@ header {
 }
 
 .sql-editor__area {
-    height: 55%
+    height: 50%
 }
 
 .editor-topbar {
@@ -205,7 +205,7 @@ header {
     position: relative
 }
 
-.editor-btn__wrapper,.options-list {
+.editor-btn__wrapper, .options-list {
     display: flex;
     align-items: center;
     background-color: var(--primary-background)
@@ -382,17 +382,19 @@ textarea {
 .output-header__container .p-tab-active {
     border-bottom: 1px solid;
     border-color: var(--mob-view-border-color);
-    color: var(--mob-view-border-color)
+    color: var(--mob-view-border-color);
+    background-color: var(--plusbtn-background-color);
 }
 
 .output-header__container button {
     border-radius: 0pt;
+    background-color: var(--output-header-color);
 }
 
 .output-header__active {
     border-bottom: 1px solid;
     border-color: var(--mob-view-border-color);
-    color: var(--mob-view-border-color)
+    color: var(--mob-view-border-color);
 }
 
 .table-info__active {
@@ -411,7 +413,14 @@ textarea {
     padding: 10px 16px 0px 10px;
     overflow: auto;
     /* height: calc(100% - 20px); */
-    background-color: var(--output-header-color)
+    background-color: var(--output-header-color);
+}
+.p-tablist, .p-tabpanels {
+   background-color: var(--output-header-color) !important; 
+}
+
+.p-tabs {
+    background-color: var(--output-header-color);
 }
 
 .p-tabs > .output-panels {
@@ -645,8 +654,8 @@ table tr td,table tr th {
     overflow-y: auto!important
 }
 
-.output-wrapper {
-    height: 45%;
+.output-wrapper, .output__wrapper {
+    height: 50%;
     background: var(--output-header-color)
 }
 
@@ -804,6 +813,14 @@ table {
 }
 
 @media screen and (min-width: 1120px) {
+    /* .output-wrapper {
+        height: 45%;
+        background: var(--output-header-color)
+    } */
+
+
+
+
     .pc-view {
         display:block!important
     }
@@ -915,7 +932,7 @@ table {
     }
 
     .sql-editor__area {
-        height: 55%
+        height: 50%
     }
 
     .editor-topbar {
