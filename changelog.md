@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v1.0.7] - 2025-12-15
+
+### Added
+
+- Add notice to SettingsDrawer (logs written to browser console)
+
+### Fixed
+
+- Set default log levels to None
+- Replace TableDisplay.vue with ResultDisplay.vue on mobile (output area was empty)
+- Update css for mobile devices
+
 ## [v1.0.6] - 2025-12-15
 
 ### Added
