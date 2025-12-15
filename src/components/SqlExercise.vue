@@ -135,6 +135,9 @@
     </ul>
   </Drawer>
 
+  <!-- Settings -->
+  <SettingsDrawer ref="settingsDrawer" />
+
   <!-- MOBILE - Table Info (left side drawer) -->
   <Drawer v-model:visible="visibleLeft" header="Table Infos">
     <TablesInfo 
@@ -201,7 +204,7 @@
             <!-- Editor icons -->
             <ul class="editor-btn-list">
               <li class="editor-btn-list__item">
-                <!-- Help text -->
+                <!-- Help text icons -->
                 <button class="editor-btn" @click="visibleHelp = true">
                   <svg 
                     width="18px" 
@@ -212,6 +215,19 @@
                     <path fill-rule="evenodd"
                       d="M0 0.225C0 0.101 0.101 0 0.225 0s0.225 0.101 0.225 0.225 -0.101 0.225 -0.225 0.225S0 0.349 0 0.225m0.25 0.045H0.202v-0.003c0 -0.044 0.011 -0.051 0.031 -0.063q0.003 -0.002 0.007 -0.004c0.016 -0.01 0.029 -0.023 0.029 -0.042 0 -0.021 -0.017 -0.035 -0.037 -0.035 -0.019 0 -0.037 0.009 -0.039 0.034H0.142C0.143 0.106 0.184 0.079 0.232 0.079c0.052 0 0.088 0.033 0.088 0.078 0 0.031 -0.016 0.051 -0.041 0.066l-0.005 0.003c-0.018 0.011 -0.023 0.014 -0.023 0.04V0.27zm0.004 0.068a0.03 0.03 0 0 1 -0.03 0.03 0.03 0.03 0 0 1 -0.03 -0.03 0.03 0.03 0 0 1 0.03 -0.03c0.016 0 0.03 0.013 0.03 0.03z" 
                       fill="#5C5F62"
+                      />
+                    </svg>                
+                </button>
+                <!-- Settings icon -->
+                <button class="editor-btn" @click="openSettings">
+                  <svg 
+                    width="18px" 
+                    height="18px" 
+                    viewBox="0 0 18 18" 
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path style=" stroke:none;fill-rule:nonzero;fill:rgb(0%,0%,0%);fill-opacity:1;"
+                      d="M 14.574219 9.730469 C 14.601562 9.492188 14.625 9.246094 14.625 9 C 14.625 8.753906 14.601562 8.507812 14.574219 8.269531 L 16.160156 7.027344 C 16.300781 6.914062 16.34375 6.710938 16.25 6.546875 L 14.75 3.949219 C 14.65625 3.789062 14.460938 3.71875 14.292969 3.789062 L 12.421875 4.542969 C 12.039062 4.246094 11.613281 3.992188 11.15625 3.800781 L 10.875 1.816406 C 10.839844 1.640625 10.6875 1.5 10.5 1.5 L 7.5 1.5 C 7.3125 1.5 7.160156 1.640625 7.128906 1.816406 L 6.847656 3.800781 C 6.390625 3.992188 5.964844 4.242188 5.578125 4.542969 L 3.710938 3.789062 C 3.542969 3.722656 3.347656 3.789062 3.253906 3.949219 L 1.753906 6.546875 C 1.660156 6.707031 1.703125 6.910156 1.84375 7.027344 L 3.425781 8.269531 C 3.398438 8.507812 3.375 8.753906 3.375 9 C 3.375 9.246094 3.398438 9.492188 3.425781 9.730469 L 1.84375 10.972656 C 1.703125 11.085938 1.660156 11.289062 1.753906 11.453125 L 3.253906 14.050781 C 3.347656 14.210938 3.542969 14.28125 3.710938 14.210938 L 5.578125 13.457031 C 5.964844 13.753906 6.390625 14.007812 6.847656 14.199219 L 7.128906 16.183594 C 7.160156 16.359375 7.3125 16.5 7.5 16.5 L 10.5 16.5 C 10.6875 16.5 10.839844 16.359375 10.871094 16.183594 L 11.152344 14.199219 C 11.609375 14.007812 12.035156 13.757812 12.421875 13.457031 L 14.289062 14.210938 C 14.457031 14.277344 14.652344 14.210938 14.746094 14.050781 L 16.246094 11.453125 C 16.339844 11.292969 16.296875 11.089844 16.15625 10.972656 Z M 9 11.625 C 7.546875 11.625 6.375 10.453125 6.375 9 C 6.375 7.546875 7.546875 6.375 9 6.375 C 10.453125 6.375 11.625 7.546875 11.625 9 C 11.625 10.453125 10.453125 11.625 9 11.625 Z M 9 11.625 "
                       />
                     </svg>                
                 </button>
@@ -382,6 +398,26 @@ import TablesInfo from './TablesInfo.vue';
 import ResultDisplay from './ResultDisplay.vue';
 import LiveIndicator from './LiveIndicator.vue';
 import SqlEditor from './SqlEditor.vue';
+
+/**
+ * Settings drawer component and control
+ * 
+ * The reactive reference `settingsDrawer` will hold a reference to the SettingsDrawer component
+ * instance once it is mounted. Initially, it is null because the component hasn’t been rendered yet.
+ */
+import SettingsDrawer from "./SettingsDrawer.vue";
+const settingsDrawer = ref(null);
+
+/**
+ * Opens the settings drawer programmatically.
+ * 
+ * Uses the `settingsDrawer` component reference and calls its `open()` method.
+ * The optional chaining (`?.`) ensures no error occurs if the component is not yet mounted.
+ */
+const openSettings = () => {
+  settingsDrawer.value?.open();
+};
+
 import debounce from '../utils/debounce';
 import dbs from '../utils/dbs';
 
