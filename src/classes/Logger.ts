@@ -54,10 +54,10 @@ export class Logger {
     this.levels = savedLevels
       ? JSON.parse(savedLevels)
       : {
-          debug: true,
-          info: true,
           success: true,
-          error: true,
+          error: false,
+          info: false,
+          debug: false,
         };
   }
 
