@@ -7,23 +7,26 @@
   >
     <h2>Log Levels</h2>
 
+    <p class="console-info">
+      All logs are written to the browser console (<strong>F12 → Console</strong
+      >).
+    </p>
+
     <div class="levels">
-      <div
-        v-for="level in levelDisplayOrder"
-        :key="level"
-        class="level-row"
-      >
+      <div v-for="level in levelDisplayOrder" :key="level" class="level-row">
         <div class="level-info">
           <span class="icon">{{ LOG_LEVEL_META[level].icon }}</span>
           <div class="text">
             <div class="label">{{ LOG_LEVEL_META[level].label }}</div>
-            <div class="description">{{ LOG_LEVEL_META[level].description }}</div>
+            <div class="description">
+              {{ LOG_LEVEL_META[level].description }}
+            </div>
           </div>
         </div>
 
         <ToggleSwitch
           :modelValue="levels[level]"
-          @update:modelValue="val => toggle(level, val)"
+          @update:modelValue="(val) => toggle(level, val)"
         />
       </div>
     </div>
@@ -85,6 +88,17 @@ defineExpose({
   width: 320px;
 }
 
+h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.console-info {
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+}
+
 .levels {
   display: flex;
   flex-direction: column;
@@ -109,7 +123,7 @@ defineExpose({
 }
 
 .text .label {
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .text .description {
