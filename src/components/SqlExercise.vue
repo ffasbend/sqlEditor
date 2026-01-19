@@ -86,8 +86,7 @@
         or parameterized queries must be executed using the <strong>RUN SQL</strong> button.
       </li>
       <li>
-        Decimal numbers support both dot (<code>.</code>) and comma (<code>,</code>)
-        as decimal separators.
+        Decimal numbers only support dot (<code>.</code>) as decimal separators.
       </li>
       <li>
         To manually enable or disable live updates, click the status indicator (🟢).
@@ -582,6 +581,7 @@ const runQuery = (liveEnabled = false) => {
   try {
     const result = db.exec(query);
     logger.success(query);
+    logger.debug("Query result", result);
     userResult.value = result;
     lastValidResult.value = result;
     syntaxError.value = false;
@@ -646,7 +646,9 @@ const normalizeQuery = (query) => {
   query = convertMSAccessDateFunctions(query);
 
   // Convert decimal commas to dots
-  query = convertDecimalCommaToDot(query);
+  // disabled, because it breaks INSERT statements with multiple values
+  // e.g. INSERT INTO table (col1, col2) VALUES (1,5, 'more text');
+  //query = convertDecimalCommaToDot(query);
 
   return query;
 }

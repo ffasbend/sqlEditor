@@ -143,6 +143,10 @@ export const convertAccessWildcardsToSQL = (sqlExpression) => {
  * Converts commas to dots in decimal numbers within a SQL query string,
  * while leaving commas inside string literals untouched.
  *
+ * !!!! WARNING !!!!
+ * This function is breaking INSERT command, because in INSERT commands
+ * decimal commas are often used as field separators.
+ *
  * Example:
  *   "price = 12,34 AND category = 'A,B'" → "price = 12.34 AND category = 'A,B'"
  *
