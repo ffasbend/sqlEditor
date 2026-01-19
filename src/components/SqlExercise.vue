@@ -67,7 +67,7 @@
   </header>
   
   <!-- Help -->
-  <Drawer v-model:visible="visibleHelp" header="Online SQL Editor Help (v1.0.7)" position="top" style="height: auto" class="help-section">
+  <Drawer v-model:visible="visibleHelp" header="Online SQL Editor Help (v1.0.8)" position="top" style="height: auto" class="help-section">
   <a 
     href="https://github.com/ffasbend/sqlEditor"
     target="_blank"
