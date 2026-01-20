@@ -778,7 +778,7 @@ const updateParameterQuery = (sqlExpression) => {
     }
 
     // Prompt the user for input
-    const userInput = prompt(`Enter value for ${paramName}:`);
+    const userInput = prompt(`${paramName}:`);
     
     // Regex to check for MS Access date literal: #MM/DD/YYYY#
     const reDate = /^#(0?[1-9]|1[0-2])\/(0?[1-9]|[12]\d|3[01])\/\d{2}(\d{2})?#$/;
