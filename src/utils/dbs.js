@@ -122,7 +122,7 @@ CREATE TABLE Client (
 	NoTel varchar(50) COLLATE NOCASE,       -- Numéro de téléphone du client
 	NoFax varchar(50) COLLATE NOCASE,       -- Numéro du fax du client
 	DateNaiss datetime,                     -- Date de naissance du client
-	BonClient char COLLATE NOCASE,          -- Valeurs possibles: YES/NO
+	BonClient boolean,          			-- Valeurs possibles: YES/NO
 	PRIMARY KEY (Numéro)
 );
 
@@ -190,7 +190,7 @@ CREATE TABLE Agent (
 	CP varchar(50) COLLATE NOCASE,
 	Localité varchar(50) COLLATE NOCASE,
 	NoTel varchar(50) COLLATE NOCASE,
-	AgentGénéral char COLLATE NOCASE,
+	AgentGénéral boolean,
 	PRIMARY KEY (NumAgent)
 );
 
