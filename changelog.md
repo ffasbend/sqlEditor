@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v1.0.9] - 2026-01-26
+
+### Added
+
+- Add support for MS Access YES/NO boolean values
+
+### Fixed
+
+- Remove unnecessary text in parameter query window
+- Modify datatype to boolean in sql databases (BonClient and AgentGénéral)
+
+## [v1.0.8] - 2026-01-19
+
+### Fixed
+
+- Disable comma -> dot conversion for numbers as it breaks INSERT statements with multiple
+  number values
+
 ## [v1.0.7] - 2025-12-15
 
 ### Added

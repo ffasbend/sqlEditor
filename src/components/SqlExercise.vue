@@ -67,7 +67,7 @@
   </header>
   
   <!-- Help -->
-  <Drawer v-model:visible="visibleHelp" header="Online SQL Editor Help (v1.0.8)" position="top" style="height: auto" class="help-section">
+  <Drawer v-model:visible="visibleHelp" header="Online SQL Editor Help (v1.0.9)" position="top" style="height: auto" class="help-section">
   <a 
     href="https://github.com/ffasbend/sqlEditor"
     target="_blank"
@@ -116,6 +116,9 @@
       <li>
         MS Access parameter queries (<code>[...]</code>) are supported; parameter
         values are entered via a popup dialog.
+      </li>
+      <li>
+        Accepts YES/NO as boolean values.
       </li>
     </ul>
 
@@ -388,8 +391,14 @@
 
 <script setup>
 import { ref, onMounted, watch, computed } from 'vue';
-import { initDatabase, getDatabase, replaceMSAccessDateLiterals, convertAccessWildcardsToSQL, convertMSAccessDateFunctions, convertDecimalCommaToDot }
-  from '../utils/database';
+import { initDatabase, 
+    getDatabase, 
+    replaceMSAccessDateLiterals, 
+    convertAccessWildcardsToSQL, 
+    convertMSAccessDateFunctions, 
+    convertDecimalCommaToDot, 
+    replaceYesNoInSQL, 
+  } from '../utils/database';
 import VueSelect from "vue3-select-component";
 import TableDisplay from './TableDisplay.vue';
 import TablesDisplay from './TablesDisplay.vue';
@@ -644,6 +653,9 @@ const normalizeQuery = (query) => {
 
   // Convert MS Access date functions to SQLite functions
   query = convertMSAccessDateFunctions(query);
+
+  // replace YES/no in WHERE and HAVING clauses
+  query = replaceYesNoInSQL(query);
 
   // Convert decimal commas to dots
   // disabled, because it breaks INSERT statements with multiple values

@@ -166,3 +166,35 @@ export const convertDecimalCommaToDot = (sql) => {
   // Replace commas between digits but **not inside quotes**
   return sql.replace(/(\d),(\d)(?=(?:[^'"]*['"][^'"]*['"])*[^'"]*$)/g, "$1.$2");
 };
+
+/**
+ * Replaces all occurrences of YES/NO with 1/0 in SQL queries
+ * for WHERE, HAVING, VALUES, and SET clauses.
+ * The replacement ignores text inside single quotes ('...').
+ *
+ * @param {string} sql - The SQL query string to process
+ * @returns {string} - The modified SQL query with YES/NO replaced
+ */
+export const replaceYesNoInSQL = (sql) => {
+  // Use a regex to find WHERE, HAVING, VALUES, or SET clauses (non-greedy)
+  // and stop matching before GROUP, ORDER, LIMIT, semicolon, or end of string
+  return sql.replace(/\b(WHERE|HAVING|VALUES|SET)\b([\s\S]*?)(?=(\bGROUP\b|\bORDER\b|\bLIMIT\b|;|$))/gi, (_, clause, content) => {
+    // Split content into quoted and non-quoted parts
+    // - even indexes: outside quotes
+    // - odd indexes: inside quotes (to preserve literal text)
+    const parts = content.split(/('(?:''|[^'])*')/);
+
+    for (let i = 0; i < parts.length; i++) {
+      // Only perform replacement on text outside of quotes
+      if (!parts[i].startsWith("'")) {
+        parts[i] = parts[i]
+          .replace(/\bYES\b/gi, "1")  // Replace YES with 1, case-insensitive
+          .replace(/\bNO\b/gi, "0");  // Replace NO with 0, case-insensitive
+      }
+    }
+
+    // Recombine the parts and prepend the clause keyword (WHERE/HAVING/VALUES/SET)
+    return clause + parts.join("");
+  });
+}
+
