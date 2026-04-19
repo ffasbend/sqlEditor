@@ -94,7 +94,7 @@ export class CurrentDB {
     //      pk = 1 → first column in the primary key
     //      pk = 2 → second column
     //      pk = 3 → third column
-    const resultColumns = this.db.exec(`PRAGMA table_info(${tableName})`);
+    const resultColumns = this.db.exec(`PRAGMA table_info('${tableName}')`);
 
     // Get foreign key definitions as dictionary with
     // Array of ForeignKey objects, keyed by current column name
@@ -122,7 +122,7 @@ export class CurrentDB {
     }
 
     // Load table rows
-    const resultData = this.db.exec(`SELECT * FROM ${tableName};`);
+    const resultData = this.db.exec(`SELECT * FROM '${tableName}';`);
     table.addValues(resultData[0].values);
     // console.log(`+ Adding ${resultData[0].values.length} table rows`);
 
@@ -154,7 +154,7 @@ export class CurrentDB {
     //   on_delete = action on delete
     //   match = match type (can be ignored in SQLite)
     const resultForeignKeys = this.db.exec(
-      `PRAGMA foreign_key_list(${tableName})`
+      `PRAGMA foreign_key_list('${tableName}')`
     );
     if (resultForeignKeys.length > 0) {
       let keys = [];
