@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v1.0.10] - 2026-04-19
+
+### Fixed
+
+- Escape all table names in CurrentDB.ts (else table named "Table" will not work)
+
 ## [v1.0.9] - 2026-01-26
 
 ### Added

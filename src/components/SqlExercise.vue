@@ -67,7 +67,7 @@
   </header>
   
   <!-- Help -->
-  <Drawer v-model:visible="visibleHelp" header="Online SQL Editor Help (v1.0.9)" position="top" style="height: auto" class="help-section">
+  <Drawer v-model:visible="visibleHelp" header="Online SQL Editor Help (v1.0.10)" position="top" style="height: auto" class="help-section">
   <a 
     href="https://github.com/ffasbend/sqlEditor"
     target="_blank"
@@ -484,7 +484,7 @@ const lastValidResult = ref(null);
 const handleValueChange = async (sql) => {
   await initDatabase(sql);
   isDbSelected.value = true;
-  loadInitialTables();
+  https://web.dev/articles/read-files();
   feedback.value = '';
 };
 
